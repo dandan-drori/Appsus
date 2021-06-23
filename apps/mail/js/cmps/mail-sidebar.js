@@ -9,10 +9,7 @@ export default {
         <aside class="mail-sidebar">
             <button>+ Compose</button>
             <ul class="mail-folders">
-                <li>Inbox</li>
-                <li>Starred</li>
-                <li>Sent Mail</li>
-                <li>Drafts</li>
+                <li v-for="link in links" @click="focusLink" :class="isFocused">{{link.text}}</li>
                 <progress-bar :progress="progress"/>
             </ul>
         </aside>
@@ -20,6 +17,14 @@ export default {
 	data() {
 		return {
 			progress: 0,
+			links: [{ text: 'Inbox' }, { text: 'Sent Mail' }, { text: 'Starred' }, { text: 'Drafts' }],
 		}
 	},
+	methods: {
+		focusLink() {},
+		isFocused() {
+			return { focus: '' }
+		},
+	},
+	computed: {},
 }

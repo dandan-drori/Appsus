@@ -5,6 +5,8 @@ const MAILS_KEY = 'mails'
 export const mailService = {
 	getMails,
 	getMailById,
+	deleteMail,
+	addMail,
 }
 
 var gMails = _createMails()
@@ -17,6 +19,12 @@ function getMails() {
 		}
 		return mails
 	})
+}
+
+function addMail() {}
+
+function deleteMail(mailId) {
+	storageService.remove(MAILS_KEY, mailId)
 }
 
 function getMailById(mailId) {

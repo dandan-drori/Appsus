@@ -1,10 +1,16 @@
 export const keepService = {
-	getNotes,
+	toggleDone,
+	query,
+	getNoteById,
+	removeNote,
 }
 
+import { storageService } from '../../../../services/async-storage-service.js'
 import { utilService } from '../../../../services/util-service.js'
 
-var notes = [
+const NOTES_KEY = 'notes'
+
+var gNotes = [
 	{
 		id: utilService.makeId(),
 		type: 'textNote',
@@ -61,6 +67,25 @@ var notes = [
 	},
 ]
 
-function getNotes() {
-	return notes
+function query() {
+	return storageService.query(NOTES_KEY).then(notes => {
+		if (!notes || !notes.length) {
+			utilService.saveToStorage(NOTES_KEY, gNotes)
+			return Promise.resolve(gNotes)
+		} else return notes
+	})
+}
+
+function getNoteById(noteId) {
+	return storageService.get(NOTES_KEY, noteId)
+}
+
+function toggleDone(note, idx) {
+	return note.info.todos[idx].doneAt === null
+		? (note.info.todos[idx].doneAt = Date.now())
+		: (note.info.todos[idx].doneAt = null)
+}
+
+function removeNote(noteId) {
+	return storageService.remove(NOTES_KEY, noteId)
 }

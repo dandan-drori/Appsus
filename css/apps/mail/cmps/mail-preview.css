@@ -1,4 +1,4 @@
-.mail-list article {
+.mail-list .mail-preview {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -9,25 +9,25 @@
 	font-weight: bold;
 }
 
-.mail-list article.read {
+.mail-list .mail-preview.read {
 	font-weight: unset;
 }
 
-.mail-list article:hover {
+.mail-list .mail-preview:hover {
 	background-color: rgba(50, 50, 50, 0.1);
 }
 
-.mail-list article .text {
+.mail-list .mail-preview .text {
 	display: flex;
 	align-items: center;
 }
 
-.mail-list article .text .body {
+.mail-list .mail-preview .text .body {
 	margin-left: 5px;
 	color: #777;
 }
 
-.mail-list article .content {
+.mail-list .mail-preview .content {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

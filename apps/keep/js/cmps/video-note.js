@@ -9,6 +9,12 @@ export default {
             height="100"
             frameborder="0" >
            </iframe>
+           <button @click="remove(note.id)">X</button>
 </div>
     `,
+	methods: {
+		remove(noteId) {
+			this.$emit('remove', noteId)
+		},
+	},
 }
