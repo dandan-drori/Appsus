@@ -1,6 +1,9 @@
 export default {
-  template: `<section>
-        <h2>Hey</h2>    
-        </section>
+  props: ['note'],
+  template: `
+        <div class="text-note">
+            <h3>text note</h3>
+            <p>{{note.info.txt}}</p>
+        </div>
     `,
 };
