@@ -7,34 +7,62 @@ export default {
             </section>
             <label>
                 To:
-                <input type="text"/>
+                <input type="text" v-model="mailData.to"/>
             </label>
             <label>
                 Cc:
-                <input type="text"/>
+                <input type="text" v-model="mailData.cc"/>
             </label>
             <label>
                 Bcc:
-                <input type="text"/>
+                <input type="text" v-model="mailData.bcc"/>
             </label>
             <label>
                 Subject:
-                <input type="text"/>
+                <input type="text" v-model="mailData.subject"/>
             </label>
-            <textarea name="body"></textarea>
+            <textarea name="body" v-model="mailData.body"></textarea>
             <section class="actions">
-                <button class="send">Send</button>
+                <button class="send" @click="onSendMail">Send</button>
                 <button @click="onCloseCompose">Close</button>
             </section>
         </section>
     `,
 	data() {
-		return {}
+		return {
+			mailData: {
+				to: null,
+				cc: null,
+				bcc: null,
+				subject: null,
+				body: null,
+			},
+		}
 	},
 	methods: {
+		resetData() {
+			this.mailData.to = null
+			this.mailData.cc = null
+			this.mailData.bcc = null
+			this.mailData.subject = null
+			this.mailData.body = null
+		},
 		onCloseCompose() {
+			this.resetData()
 			this.$emit('close-compose')
 		},
+		onSendMail() {
+			// this.resetData()
+			this.$emit('send-mail', this.mailData)
+		},
 	},
-	computed: {},
+	created() {
+		if (this.mail) {
+			const { cc, bcc, subject, body } = this.mail
+			this.mailData.cc = cc
+			this.mailData.bcc = bcc
+			this.mailData.subject = subject
+			this.mailData.body = body
+		}
+	},
 }

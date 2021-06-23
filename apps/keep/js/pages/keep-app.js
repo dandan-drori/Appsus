@@ -10,9 +10,9 @@ export default {
     
         <section>
             <h2>this is keep app</h2>
-			<add-note @addNote="addNote"/>
+			<add-note @addNote="addNote" :note="noteToEdit" :key="key" @editNote="editNote"/>
             <section v-if="notes" v-for="note in notes" :key="note.id">
-        <component :is="note.type"  :note="note" @remove="removeNote"/>
+        <component :is="note.type"  :note="note" @remove="removeNote" @edit="onEditNote"/>
 
         </section>
         </section>
@@ -22,6 +22,8 @@ export default {
 	data() {
 		return {
 			notes: [],
+			noteToEdit: null,
+			key: '',
 		}
 	},
 	methods: {
@@ -37,6 +39,18 @@ export default {
 			keepService.addNewNote(newNote).then(note => {
 				this.notes.unshift(note)
 			})
+		},
+		onEditNote(noteId) {
+			keepService.getNoteById(noteId).then(note => {
+				this.noteToEdit = note
+				this.key += 'a'
+			})
+		},
+		editNote(note) {
+			keepService.updateNote(note).then(() => {
+				this.loadNotes()
+			})
+			console.log(note)
 		},
 	},
 	created() {

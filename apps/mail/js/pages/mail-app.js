@@ -12,8 +12,8 @@ export default {
 	template: `
         <section class="mail-app main-app">
             <mail-sidebar @open-compose="openCompose"/>
-            <mail-list v-if="mails && !isComposing" :mails="mails" :selected-mail="selectedMail" @delete-mail="onDeleteMail" @select-mail="onSelectMail" />
-			<mail-compose v-if="isComposing" @close-compose="closeCompose" />
+            <mail-list v-if="mails && !isComposing" :mails="mails" :selected-mail="selectedMail" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail"/>
+			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
         </section>
     `,
 	data() {
@@ -21,6 +21,7 @@ export default {
 			mails: null,
 			selectedMail: null,
 			isComposing: false,
+			mailToForward: null,
 		}
 	},
 	methods: {
@@ -35,10 +36,23 @@ export default {
 				this.loadMails()
 			})
 		},
+		onForwardMail(mailId) {
+			mailService.getMailById(mailId).then(mail => {
+				this.mailToForward = mail
+				this.isComposing = true
+			})
+		},
+		onSendMail(mailData) {
+			mailService.addMail(mailData).then(mail => {
+				this.closeCompose()
+				this.loadMails()
+			})
+		},
 		openCompose() {
 			this.isComposing = true
 		},
 		closeCompose() {
+			this.mailToForward = null
 			this.isComposing = false
 		},
 	},

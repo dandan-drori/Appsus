@@ -5,6 +5,8 @@ export const keepService = {
 	removeNote,
 	getEmptyNote,
 	addNewNote,
+	updateNote,
+	getListTextObject,
 }
 
 import { storageService } from '../../../../js/services/async-storage-service.js'
@@ -93,6 +95,9 @@ function removeNote(noteId) {
 }
 
 function getEmptyNote(noteType, noteTitle, noteContent) {
+	const todoList = noteContent.split(',')
+	const listTxt = getListTextObject(todoList)
+
 	let newNote = {
 		id: utilService.makeId(),
 		type: noteType,
@@ -112,18 +117,46 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
 			}
 			return newNote
 		case 'imgNote':
-			;(newNote.info = {
+			newNote.info = {
 				url: `${noteContent}`,
 				title: noteTitle,
-			}),
-				(newNote.style = {
-					backgroundColor: '#00d',
-				})
+			}
+			newNote.style = {
+				backgroundColor: '#00d',
+			}
 			return newNote
 		case 'listNote':
+			newNote.info = {
+				label: noteTitle,
+				todos: listTxt,
+			}
+			return newNote
 	}
 }
 
 function addNewNote(note) {
 	return storageService.post(NOTES_KEY, note)
+}
+
+// id: utilService.makeId(),
+// 		type: 'listNote',
+// 		info: {
+// 			label: 'How was it:',
+// 			todos: [
+// 				{ txt: 'Do that', doneAt: null },
+// 				{ txt: 'Do this', doneAt: 187111111 },
+// 			],
+// 		},
+
+function getListTextObject(list) {
+	return list.map(str => {
+		return {
+			txt: str,
+			doneAt: null,
+		}
+	})
+}
+
+function updateNote(note) {
+	return storageService.put(NOTES_KEY, note)
 }

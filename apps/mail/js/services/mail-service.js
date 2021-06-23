@@ -21,7 +21,17 @@ function getMails() {
 	})
 }
 
-function addMail() {}
+function addMail(mailData) {
+	const { to, cc, bcc, subject, body } = mailData
+	if (cc.indexOf(',') !== -1) {
+		cc = cc.split(',')
+	}
+	if (bcc.indexOf(',') !== -1) {
+		bcc = bcc.split(',')
+	}
+	const mail = _createMail(cc, bcc, subject, body)
+	return storageService.post(MAILS_KEY, mail)
+}
 
 function deleteMail(mailId) {
 	return storageService.remove(MAILS_KEY, mailId)
@@ -40,7 +50,7 @@ function _createMails() {
 	]
 }
 
-function _createMail(subject, body) {
+function _createMail(cc, bcc, subject, body) {
 	const id = utilService.makeId()
 	return {
 		id,
@@ -52,6 +62,8 @@ function _createMail(subject, body) {
 			name: 'Dandan',
 			id,
 		},
+		cc,
+		bcc,
 		subject,
 		body,
 		isRead: false,

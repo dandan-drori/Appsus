@@ -5,7 +5,8 @@ export default {
             <section class="mail-peek-header">
                 <h2>{{mail.subject}}</h2>
                 <section class="mail-peek-actions">
-                    <button @click="onDelete(mail.id)">Del</button>
+                    <button @click="onDeleteMail(mail.id)">Del</button>
+                    <button @click="onForwardMail(mail.id)">Fwd</button>
                     <button>MUr</button>
                     <button>Ful</button>
                 </section>
@@ -20,8 +21,11 @@ export default {
         </section>
     `,
 	methods: {
-		onDelete(mailId) {
+		onDeleteMail(mailId) {
 			this.$emit('delete-mail', mailId)
+		},
+		onForwardMail(mailId) {
+			this.$emit('forward-mail', mailId)
 		},
 	},
 	computed: {
