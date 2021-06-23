@@ -1,0 +1,8 @@
+@import '../cmps/mail-sidebar.css';
+@import '../cmps/mail-list.css';
+@import '../cmps/mail-preview.css';
+@import '../cmps/mail-compose.css';
+
+.mail-app {
+	display: flex;
+}

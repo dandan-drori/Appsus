@@ -1,0 +1,35 @@
+.mail-list article {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.mail-list article.read {
+	font-weight: unset;
+}
+
+.mail-list article:hover {
+	background-color: rgba(50, 50, 50, 0.1);
+}
+
+.mail-list article .text {
+	display: flex;
+	align-items: center;
+}
+
+.mail-list article .text .body {
+	margin-left: 5px;
+	color: #777;
+}
+
+.mail-list article .content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 72.5%;
+}
