@@ -1,0 +1,17 @@
+.add-note {
+	display: flex;
+	justify-content: space-between;
+	background-color: lightcoral;
+}
+
+.add-note-btn {
+	border: 1px solid black;
+	width: 60px;
+	border-radius: 5px;
+	background-color: whitesmoke;
+}
+
+.add-note input {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}

@@ -1,0 +1,20 @@
+.mail-peek {
+	padding: 15px;
+}
+
+.mail-peek-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.mail-peek-sender-info {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.mail-peek-body {
+	padding: 0 30px;
+}

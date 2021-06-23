@@ -3,6 +3,8 @@ export const keepService = {
 	query,
 	getNoteById,
 	removeNote,
+	getEmptyNote,
+	addNewNote,
 }
 
 import { storageService } from '../../../../services/async-storage-service.js'
@@ -88,4 +90,40 @@ function toggleDone(note, idx) {
 
 function removeNote(noteId) {
 	return storageService.remove(NOTES_KEY, noteId)
+}
+
+function getEmptyNote(noteType, noteTitle, noteContent) {
+	let newNote = {
+		id: utilService.makeId(),
+		type: noteType,
+	}
+	switch (noteType) {
+		case 'textNote':
+			newNote.isPinned = false
+			newNote.info = {
+				txt: noteContent,
+				title: noteTitle,
+			}
+			return newNote
+		case 'videoNote':
+			newNote.info = {
+				url: `${noteContent}`,
+				title: noteTitle,
+			}
+			return newNote
+		case 'imgNote':
+			;(newNote.info = {
+				url: `${noteContent}`,
+				title: noteTitle,
+			}),
+				(newNote.style = {
+					backgroundColor: '#00d',
+				})
+			return newNote
+		case 'listNote':
+	}
+}
+
+function addNewNote(note) {
+	return storageService.post(NOTES_KEY, note)
 }

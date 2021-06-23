@@ -7,7 +7,7 @@ export default {
 	props: {},
 	template: `
         <aside class="mail-sidebar">
-            <button>+ Compose</button>
+            <button @click="onCompose">+ Compose</button>
             <ul class="mail-folders">
                 <li v-for="link in links" @click="focusLink" :class="isFocused">{{link.text}}</li>
                 <progress-bar :progress="progress"/>
@@ -24,6 +24,9 @@ export default {
 		focusLink() {},
 		isFocused() {
 			return { focus: '' }
+		},
+		onCompose() {
+			this.$emit('open-compose')
 		},
 	},
 	computed: {},

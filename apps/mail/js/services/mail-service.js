@@ -24,7 +24,7 @@ function getMails() {
 function addMail() {}
 
 function deleteMail(mailId) {
-	storageService.remove(MAILS_KEY, mailId)
+	return storageService.remove(MAILS_KEY, mailId)
 }
 
 function getMailById(mailId) {
