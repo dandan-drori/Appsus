@@ -1,0 +1,11 @@
+@import './basic/base.css';
+@import './basic/fonts.css';
+@import './basic/helpers.css';
+@import './pages/home-page.css';
+@import './cmps/app-header.css';
+@import './cmps/app-footer.css';
+
+.main-app {
+	height: 90vh;
+	padding: 0 30px;
+}
