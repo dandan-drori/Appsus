@@ -28,30 +28,39 @@ export default {
 	},
 	methods: {
 		onSetFilter() {
-			if (this.app === 'mail') {
+			if (this.app !== 'books' && this.app !== 'keep') {
 				eventBus.$emit('set-filter-mail', this.filterBy)
 			} else if (this.app === 'keep') {
 				eventBus.$emit('set-filter-keep', this.filterBy)
 			}
 		},
 		onSetSort() {
-			if (this.app === 'mail') {
+			if (this.app !== 'books' && this.app !== 'keep') {
 				eventBus.$emit('set-sort-mail', this.sortBy)
 			}
 		},
 		onSetRead() {
-			if (this.app === 'mail') {
+			if (this.app !== 'books' && this.app !== 'keep') {
 				eventBus.$emit('set-read-mail', this.read)
 			}
 		},
 	},
 	computed: {
 		placeholder() {
-			return this.app === 'mail'
-				? 'Search mail'
-				: this.app === 'keep'
-				? 'Search notes'
-				: 'Search books'
+			switch (this.app) {
+				case 'mail':
+					return 'Search mail'
+				case 'keep':
+					return 'Search notes'
+				case 'book':
+					return 'Search books'
+				case 'mail/sent':
+					return 'Search sent mails'
+				case 'mail/star':
+					return 'Search starred'
+				case 'draft':
+					return 'Search drafts'
+			}
 		},
 	},
 	created() {

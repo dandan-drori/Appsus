@@ -14,12 +14,10 @@
 
 # Daniel
 
-- dynamic placeholder
-
-- eventBus - <user-msg /> (after add / edit / delete - show the user a custom message)
-
 - integrate <long-txt /> component into notes to prevent overflow
 
 - apps integration - send any note as email
+
+- add fontAwesome icons to add/edit/delete
 
 - styling

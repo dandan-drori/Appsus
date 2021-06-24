@@ -4,7 +4,6 @@ export default {
         <section class="mail-peek">
             <section class="mail-peek-header">
                 <h2>{{mail.subject}}</h2>
-                
             </section>
             <section class="mail-peek-sender-info">
                 <h4>{{mail.sender.name}}</h4>

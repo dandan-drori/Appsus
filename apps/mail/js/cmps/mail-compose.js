@@ -24,7 +24,9 @@ export default {
             <textarea name="body" v-model="mailData.body"></textarea>
             <section class="actions">
                 <button class="send" @click="onSendMail">Send</button>
-                <button @click="onCloseCompose">Close</button>
+                <button @click="onCloseCompose">
+					<i class="fas fa-trash compose-trash"></i>
+				</button>
             </section>
         </section>
     `,

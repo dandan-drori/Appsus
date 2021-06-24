@@ -51,3 +51,8 @@
 	color: #fefefe;
 	font-size: 1rem;
 }
+
+.mail-compose .compose-trash {
+	font-size: 2rem;
+	color: #222;
+}

@@ -9,6 +9,15 @@
 
 .mail-sidebar > button {
 	margin-bottom: 50px;
+	font-size: 1.2rem;
+	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2), -1px -1px 3px 1px rgba(0, 0, 0, 0.2);
+	padding: 10px 20px;
+	border-radius: 35px;
+	color: #bb0000;
+}
+
+.mail-sidebar > button > i {
+	margin-right: 10px;
 }
 
 .mail-folders {
@@ -17,15 +26,23 @@
 }
 
 .mail-folders li {
-	background-color: #fff;
+	display: flex;
+	width: 100%;
+	border-radius: 0 35px 35px 0;
+	user-select: none;
+}
+
+.mail-folders li a {
+	display: inline-block;
 	width: 92%;
+	color: #050505;
 	padding: 10px 20px;
 	cursor: pointer;
 	border-radius: 0 35px 35px 0;
 	user-select: none;
 }
 
-.mail-folders li:hover {
+.mail-folders li a:hover {
 	background-color: rgba(50, 50, 50, 0.1);
 }
 
@@ -33,4 +50,9 @@
 	background-color: rgba(255, 88, 88, 0.2);
 	color: #ff2233;
 	font-weight: bold;
+}
+
+.mail-folders li a.router-link-exact-active {
+	color: #cc0000;
+	background-color: rgba(255, 0, 0, 0.1);
 }
