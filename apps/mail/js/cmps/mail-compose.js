@@ -52,7 +52,6 @@ export default {
 			this.$emit('close-compose')
 		},
 		onSendMail() {
-			// this.resetData()
 			this.$emit('send-mail', this.mailData)
 		},
 	},
@@ -61,7 +60,7 @@ export default {
 			const { cc, bcc, subject, body } = this.mail
 			this.mailData.cc = cc
 			this.mailData.bcc = bcc
-			this.mailData.subject = subject
+			this.mailData.subject = 'Re: ' + subject
 			this.mailData.body = body
 		}
 	},

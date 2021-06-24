@@ -4,20 +4,38 @@ import imgNote from '../cmps/img-note.js'
 import videoNote from '../cmps/video-note.js'
 import listNote from '../cmps/list-note.js'
 import addNote from '../cmps/add-note.js'
+import noteFilter from '../cmps/note-filter.js'
+import { eventBus } from '../../../../js/services/event-bus-service.js'
 
 export default {
 	template: `
     
         <section>
             <h2>this is keep app</h2>
+
+			<note-filter @filtered="setFilter"/>
+
 			<add-note @addNote="addNote" :note="noteToEdit" :key="key" @editNote="editNote"/>
+
 			<section  class="note-container">
-            <section v-if="notes" v-for="note in notes" :key="note.id" class="notes-main">
+
+            <section v-if="notes" v-for="note in  getPinnedNotes" :key="note.id" class="notes-main">
+			<component :is="note.type"  :note="note" @remove="removeNote"
+			 @edit="onEditNote" 
+			 @editColor="updateColor"
+			 @setPin="setPin"/>
+				
+			</section>
+
+            <section v-if="notes" v-for="note in notesToShow" :key="note.id" class="notes-main">
 			
-        <component :is="note.type"  :note="note" @remove="removeNote"
-		 @edit="onEditNote" 
-		 @editColor="updateColor"/>
-		</section>
+        	<component :is="note.type"  :note="note" @remove="removeNote"
+			 	@edit="onEditNote" 
+		 		@editColor="updateColor"
+				 @setPin="setPin"/>
+	
+				</section>
+
         </section>
         </section>
         
@@ -28,6 +46,7 @@ export default {
 			notes: [],
 			noteToEdit: null,
 			key: '',
+			filterBy: null,
 		}
 	},
 	methods: {
@@ -35,9 +54,24 @@ export default {
 			keepService.query().then(notes => (this.notes = notes))
 		},
 		removeNote(id) {
-			keepService.removeNote(id).then(() => {
-				this.loadNotes()
-			})
+			keepService
+				.removeNote(id)
+				.then(() => {
+					const msg = {
+						txt: 'Deleted successfuly',
+						type: 'success',
+					}
+					eventBus.$emit('show-msg', msg)
+					this.loadNotes()
+				})
+				.catch(err => {
+					console.log(err)
+					const msg = {
+						txt: 'Error please try again!',
+						type: 'error',
+					}
+					eventBus.$emit('show-msg', msg)
+				})
 		},
 		addNote(newNote) {
 			keepService.addNewNote(newNote).then(note => {
@@ -64,6 +98,16 @@ export default {
 				})
 			})
 		},
+		setFilter(filterBy) {
+			this.filterBy = filterBy
+		},
+		setPin(noteId) {
+			keepService.getNoteById(noteId).then(note => {
+				keepService.updatePin(note).then(() => {
+					this.loadNotes()
+				})
+			})
+		},
 	},
 	created() {
 		// this.notes = keepService.getNotes()
@@ -75,5 +119,46 @@ export default {
 		videoNote,
 		listNote,
 		addNote,
+		noteFilter,
+	},
+	computed: {
+		getPinnedNotes() {
+			let filteredNotes = this.notes.filter(note => {
+				return note.isPinned
+			})
+
+			if (!this.filterBy || this.filterBy === '') {
+				return filteredNotes
+			}
+			filteredNotes = filteredNotes.filter(note => {
+				if (note.type === 'textNote') {
+					return note.info.txt.includes(this.filterBy)
+				}
+				if (note.type === 'listNote') {
+					return note.info.label.includes(this.filterBy)
+				} else return note.info.title.includes(this.filterBy)
+			})
+
+			return filteredNotes
+		},
+		notesToShow() {
+			let filteredNotes = this.notes.filter(note => {
+				return !note.isPinned
+			})
+
+			if (!this.filterBy || this.filterBy === '') {
+				return filteredNotes
+			}
+			filteredNotes = filteredNotes.filter(note => {
+				if (note.type === 'textNote') {
+					return note.info.txt.includes(this.filterBy)
+				}
+				if (note.type === 'listNote') {
+					return note.info.label.includes(this.filterBy)
+				} else return note.info.title.includes(this.filterBy)
+			})
+
+			return filteredNotes
+		},
 	},
 }

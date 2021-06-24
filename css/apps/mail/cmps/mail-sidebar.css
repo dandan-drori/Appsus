@@ -18,9 +18,11 @@
 
 .mail-folders li {
 	background-color: #fff;
-	width: 100%;
+	width: 92%;
 	padding: 10px 20px;
 	cursor: pointer;
+	border-radius: 0 35px 35px 0;
+	user-select: none;
 }
 
 .mail-folders li:hover {

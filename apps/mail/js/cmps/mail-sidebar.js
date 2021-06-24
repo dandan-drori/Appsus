@@ -4,19 +4,29 @@ export default {
 	components: {
 		progressBar,
 	},
-	props: { unreadMails: Number },
+	props: { readMails: Number, mails: Array },
 	template: `
         <aside class="mail-sidebar">
-            <button @click="onCompose">+ Compose</button>
+            <button @click="onCompose">
+				<i class="fas fa-plus"></i>Compose
+			</button>
             <ul class="mail-folders">
-                <li v-for="link in links" @click="focusLink" :class="isFocused">{{link.text}}</li>
+                <li v-for="link in links" @click="focusLink" :class="isFocused">
+					<i :class="link.class"></i>
+					{{link.text}}
+				</li>
             </ul>
-			<progress-bar :unread-mails="unreadMails"/>
+			<progress-bar :read-mails="readMails" :mails="mails"/>
         </aside>
     `,
 	data() {
 		return {
-			links: [{ text: 'Inbox' }, { text: 'Sent Mail' }, { text: 'Starred' }, { text: 'Drafts' }],
+			links: [
+				{ text: 'Inbox', class: 'fas fa-inbox' },
+				{ text: 'Sent Mail', class: 'fas fa-paper-plane' },
+				{ text: 'Starred', class: 'far fa-star' },
+				{ text: 'Drafts', class: 'fas fa-file' },
+			],
 		}
 	},
 	methods: {

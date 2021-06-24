@@ -1,12 +1,11 @@
 export default {
-	props: { unreadMails: Number },
+	props: { readMails: Number, mails: Array },
 	template: `
         <progress max="100" :value="progress"><span></span></progress>
     `,
 	computed: {
 		progress() {
-			console.log('this.unreadMails', this.unreadMails)
-			return 100 / (this.unreadMails + 1)
+			return ((100 / this.mails.length) * this.readMails).toFixed(0)
 		},
 	},
 }

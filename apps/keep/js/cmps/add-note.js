@@ -38,6 +38,7 @@ export default {
 				const obj = {
 					id: this.note.id,
 					type: this.note.type,
+					isPinned: false,
 					info: {},
 					style: {
 						backgroundColor: this.note.style.backgroundColor,
@@ -49,6 +50,8 @@ export default {
 					obj.info.title = this.noteTitle
 				}
 				if (this.note.type === 'textNote') {
+					console.log(this.noteTitle)
+					obj.title = this.noteTitle
 					obj.info.txt = this.noteContent
 				} else if (this.note.type === 'listNote') {
 					obj.info.todos = keepService.getListTextObject(this.noteContent.split(','))
@@ -81,9 +84,11 @@ export default {
 		if (this.note) {
 			this.isEdit = true
 			this.noteType = this.note.type
+
 			this.noteContent = this.note.type === 'textNote' ? this.note.info.txt : this.note.info.url
 			this.noteTitle = this.note.type === 'listNote' ? this.note.info.label : this.note.info.title
 			if (this.note.type === 'listNote') this.noteContent = this.arrayToString(this.note.info.todos)
+			if (this.note.type === 'textNote') this.noteTitle = this.note.title
 		}
 	},
 	watch: {

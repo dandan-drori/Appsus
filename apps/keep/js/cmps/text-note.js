@@ -2,9 +2,10 @@ export default {
 	props: ['note'],
 	template: `
         <div class="note text-note" :style="{backgroundColor:getColor}">
-			<h3>{{note.info.title}}</h3>
+			<h3>{{note.title}}</h3>
             <p>{{note.info.txt}}</p>
 			<input type="color" v-model="color" @change="updateColor(note.id)">
+			<button @click="pinNote(note.id)">{{title}}</button>
 			<button @click="edit(note.id)">Edit</button>
             <button @click="remove(note.id)">X</button>
         </div>
@@ -24,11 +25,17 @@ export default {
 		updateColor(noteId) {
 			this.$emit('editColor', this.color, noteId)
 		},
+		pinNote(noteId) {
+			this.$emit('setPin', noteId)
+		},
 	},
 	computed: {
 		getColor() {
 			console.log(this.note)
 			return this.note.style.backgroundColor
+		},
+		title() {
+			return this.note.isPinned ? 'Unpin' : 'pin'
 		},
 	},
 }

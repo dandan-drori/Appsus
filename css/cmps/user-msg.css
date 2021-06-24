@@ -1,0 +1,37 @@
+.user-msg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #fefefe;
+}
+
+.user-msg p {
+	color: #bbb;
+}
+
+.user-msg.success {
+	border: 5px solid rgb(37, 206, 37);
+}
+
+.user-msg.error {
+	border: 5px solid red;
+}
+
+.user-msg.success h3 {
+	color: rgb(37, 206, 37);
+}
+
+.user-msg.error h3 {
+	color: red;
+}
+
+.user-msg.success button {
+	background-color: rgb(37, 206, 37);
+}
+
+.user-msg.error button {
+	background-color: red;
+}

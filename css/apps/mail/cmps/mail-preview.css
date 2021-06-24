@@ -7,14 +7,16 @@
 	padding: 10px 20px;
 	cursor: pointer;
 	font-weight: bold;
+	user-select: none;
 }
 
 .mail-list .mail-preview.read {
 	font-weight: unset;
+	background-color: rgba(50, 50, 50, 0.1);
 }
 
 .mail-list .mail-preview:hover {
-	background-color: rgba(50, 50, 50, 0.1);
+	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2), -1px -1px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
 .mail-list .mail-preview .text {
@@ -32,4 +34,12 @@
 	justify-content: space-between;
 	align-items: center;
 	width: 72.5%;
+}
+
+.mail-preview-actions {
+	position: relative;
+}
+
+.mail-preview-actions button:hover {
+	color: rgb(68, 0, 0);
 }

@@ -1,25 +1,25 @@
 # Dandan
 
-- mark as unread button for emails => bug - when preview is clicked again after being marked as unread, the text becomes unbold again instead of staying bold.
-
-- progress bar for read emails
-
 - full screen button for emails
 
 - create nested routes for / sent mail, starred, drafts
 
-- search / filter
-
-- integrate fontAwesome
-
 - apps integration - save email as a text note
+
+- styling
+
+- eventBus - <user-msg /> (after add / edit / delete - show the user a custom message)
+
+- integrate <long-text /> into preview so the body text wont overflow
 
 # Daniel
 
-- change color of notes
+- dynamic placeholder
 
-- search / filter
+- eventBus - <user-msg /> (after add / edit / delete - show the user a custom message)
 
-- format youtube url to embed url
+- integrate <long-txt /> component into notes to prevent overflow
 
 - apps integration - send any note as email
+
+- styling

@@ -8,6 +8,7 @@ export const keepService = {
 	updateNote,
 	getListTextObject,
 	updateColor,
+	updatePin,
 }
 
 import { storageService } from '../../../../js/services/async-storage-service.js'
@@ -20,6 +21,7 @@ var gNotes = [
 		id: utilService.makeId(),
 		type: 'textNote',
 		isPinned: true,
+		title: 'Hey!',
 		info: {
 			txt: 'Fullstack Me Baby!',
 		},
@@ -31,6 +33,7 @@ var gNotes = [
 		id: utilService.makeId(),
 		type: 'textNote',
 		isPinned: true,
+		title: 'Hey!',
 		info: {
 			txt: 'Fullstack Me Baby!',
 		},
@@ -42,6 +45,7 @@ var gNotes = [
 		id: utilService.makeId(),
 		type: 'textNote',
 		isPinned: true,
+		title: 'Hey!',
 		info: {
 			txt: 'Fullstack Me Baby!',
 		},
@@ -52,6 +56,7 @@ var gNotes = [
 	{
 		id: utilService.makeId(),
 		type: 'imgNote',
+		isPinned: true,
 		info: {
 			url: 'https://mcdn.wallpapersafari.com/medium/87/17/2LhMvT.jpg',
 			title: 'Me playing Mi',
@@ -63,6 +68,7 @@ var gNotes = [
 	{
 		id: utilService.makeId(),
 		type: 'videoNote',
+		isPinned: true,
 		info: {
 			url: 'https://www.youtube.com/embed/xojET5h50Ec',
 			title: 'Diamond hearts',
@@ -74,6 +80,7 @@ var gNotes = [
 	{
 		id: utilService.makeId(),
 		type: 'listNote',
+		isPinned: false,
 		info: {
 			label: 'How was it:',
 			todos: [
@@ -115,6 +122,11 @@ function removeNote(noteId) {
 	return storageService.remove(NOTES_KEY, noteId)
 }
 
+function updatePin(note) {
+	note.isPinned = !note.isPinned
+	return storageService.put(NOTES_KEY, note)
+}
+
 function getEmptyNote(noteType, noteTitle, noteContent) {
 	const todoList = noteContent.split(',')
 	const listTxt = getListTextObject(todoList)
@@ -122,17 +134,18 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
 	if (noteType === 'videoNote') {
 		noteContent = noteContent.replace('watch?v=', 'embed/')
 	}
+	console.log(noteContent)
 
 	let newNote = {
 		id: utilService.makeId(),
 		type: noteType,
+		isPinned: false,
 	}
 	switch (noteType) {
 		case 'textNote':
-			newNote.isPinned = false
+			newNote.title = noteTitle
 			newNote.info = {
 				txt: noteContent,
-				title: noteTitle,
 			}
 			newNote.style = {
 				backgroundColor: '#00d',

@@ -3,12 +3,12 @@ import mailPeek from './mail-peek.js'
 
 export default {
 	components: { mailPreview, mailPeek },
-	props: { mails: Array, selectedMail: String },
+	props: { mails: Array, selectedMail: String, recentUnread: String },
 	template: `
         <section class="mail-list">
             <article v-for="mail in mails" class="mail-item" :key="mail.id">
-                <mail-preview :mail="mail" @click.native="onSelectMail(mail.id)" class="mail-preview" />
-                <mail-peek v-if="isSelected(mail.id)" :mail="mail" class="mail-peek" @delete-mail="onDeleteMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail"/>
+                <mail-preview :mail="mail" @click.native="onSelectMail(mail.id)" class="mail-preview" @read-mail="onReadMail(mail.id)" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" />
+                <mail-peek v-if="isSelected(mail.id) && !recentUnread" :mail="mail" class="mail-peek" />
             </article>
         </section>
     `,
@@ -27,6 +27,9 @@ export default {
 		},
 		onUnreadMail(mailId) {
 			this.$emit('unread-mail', mailId)
+		},
+		onReadMail(mailId) {
+			this.$emit('read-mail', mailId)
 		},
 	},
 }
