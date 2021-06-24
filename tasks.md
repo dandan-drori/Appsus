@@ -2,7 +2,9 @@
 
 - full screen button for emails
 
-- create nested routes for / sent mail, starred, drafts
+- switch between open and closed envelope when marking as unread
+
+- when closing unfinished compose, save to drafts page
 
 - apps integration - save email as a text note
 
@@ -17,7 +19,5 @@
 - integrate <long-txt /> component into notes to prevent overflow
 
 - apps integration - send any note as email
-
-- add fontAwesome icons to add/edit/delete
 
 - styling

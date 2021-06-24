@@ -1,0 +1,17 @@
+.app-filter {
+	display: flex;
+}
+
+.app-filter input {
+	padding: 0.5rem 0.7rem;
+	border-radius: 7px;
+	font-size: 1rem;
+	width: 20rem;
+	/* width: 100%; */
+}
+
+.app-filter select {
+	border-radius: 7px;
+	margin-left: 10px;
+	background-color: #fff;
+}

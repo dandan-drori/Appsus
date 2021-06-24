@@ -13,7 +13,7 @@ export default {
 	template: `
         <section class="mail-app main-app">
             <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails"/>
-            <mail-list v-if="mails && !isComposing" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail"/>
+            <mail-list v-if="mails && !isComposing" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar"/>
 			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
         </section>
     `,
@@ -34,6 +34,28 @@ export default {
 		loadMails() {
 			mailService.getMails().then(mails => {
 				this.mails = mails
+				this.readMails = 0
+				mails.forEach(mail => {
+					if (mail.isRead) this.readMails += 1
+				})
+			})
+		},
+		loadSentMails() {
+			mailService.getMails().then(mails => {
+				this.mails = mails.filter(mail => {
+					return mail.isSent
+				})
+				this.readMails = 0
+				mails.forEach(mail => {
+					if (mail.isRead) this.readMails += 1
+				})
+			})
+		},
+		loadStarredMails() {
+			mailService.getMails().then(mails => {
+				this.mails = mails.filter(mail => {
+					return mail.isStarred
+				})
 				this.readMails = 0
 				mails.forEach(mail => {
 					if (mail.isRead) this.readMails += 1
@@ -82,6 +104,11 @@ export default {
 			})
 			this.unreadMail = null
 		},
+		onToggleStar(mailId) {
+			mailService.toggleStar(mailId).then(() => {
+				this.loadMails()
+			})
+		},
 		openCompose() {
 			this.isComposing = true
 		},
@@ -124,7 +151,13 @@ export default {
 		},
 	},
 	created() {
-		this.loadMails()
+		if (this.$route.path.includes('sent')) {
+			this.loadSentMails()
+		} else if (this.$route.path.includes('star')) {
+			this.loadStarredMails()
+		} else {
+			this.loadMails()
+		}
 		eventBus.$on('set-filter-mail', filterBy => {
 			this.filterBy = filterBy
 		})
