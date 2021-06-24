@@ -6,9 +6,9 @@ export default {
 	props: { mails: Array, selectedMail: String },
 	template: `
         <section class="mail-list">
-            <article v-for="mail in mails" class="mail-item">
-                <mail-preview :mail="mail" key="mail.id" @click.native="onSelectMail(mail.id)" class="mail-preview" />
-                <mail-peek v-if="isSelected(mail.id)" :mail="mail" class="mail-peek" @delete-mail="onDeleteMail" @forward-mail="onForwardMail"/>
+            <article v-for="mail in mails" class="mail-item" :key="mail.id">
+                <mail-preview :mail="mail" @click.native="onSelectMail(mail.id)" class="mail-preview" />
+                <mail-peek v-if="isSelected(mail.id)" :mail="mail" class="mail-peek" @delete-mail="onDeleteMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail"/>
             </article>
         </section>
     `,
@@ -24,6 +24,9 @@ export default {
 		},
 		onForwardMail(mailId) {
 			this.$emit('forward-mail', mailId)
+		},
+		onUnreadMail(mailId) {
+			this.$emit('unread-mail', mailId)
 		},
 	},
 }

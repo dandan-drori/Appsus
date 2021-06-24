@@ -7,6 +7,7 @@ export const keepService = {
 	addNewNote,
 	updateNote,
 	getListTextObject,
+	updateColor,
 }
 
 import { storageService } from '../../../../js/services/async-storage-service.js'
@@ -22,13 +23,8 @@ var gNotes = [
 		info: {
 			txt: 'Fullstack Me Baby!',
 		},
-	},
-	{
-		id: utilService.makeId(),
-		type: 'textNote',
-		isPinned: true,
-		info: {
-			txt: 'Fullstack Me Baby!',
+		style: {
+			backgroundColor: '#00d',
 		},
 	},
 	{
@@ -37,6 +33,20 @@ var gNotes = [
 		isPinned: true,
 		info: {
 			txt: 'Fullstack Me Baby!',
+		},
+		style: {
+			backgroundColor: '#00d',
+		},
+	},
+	{
+		id: utilService.makeId(),
+		type: 'textNote',
+		isPinned: true,
+		info: {
+			txt: 'Fullstack Me Baby!',
+		},
+		style: {
+			backgroundColor: '#00d',
 		},
 	},
 	{
@@ -57,6 +67,9 @@ var gNotes = [
 			url: 'https://www.youtube.com/embed/xojET5h50Ec',
 			title: 'Diamond hearts',
 		},
+		style: {
+			backgroundColor: '#fff',
+		},
 	},
 	{
 		id: utilService.makeId(),
@@ -67,6 +80,9 @@ var gNotes = [
 				{ txt: 'Do that', doneAt: null },
 				{ txt: 'Do this', doneAt: 187111111 },
 			],
+		},
+		style: {
+			backgroundColor: '#fff',
 		},
 	},
 ]
@@ -84,6 +100,11 @@ function getNoteById(noteId) {
 	return storageService.get(NOTES_KEY, noteId)
 }
 
+function updateColor(note, color) {
+	note.style.backgroundColor = `${color}`
+	return storageService.put(NOTES_KEY, note)
+}
+
 function toggleDone(note, idx) {
 	return note.info.todos[idx].doneAt === null
 		? (note.info.todos[idx].doneAt = Date.now())
@@ -98,6 +119,10 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
 	const todoList = noteContent.split(',')
 	const listTxt = getListTextObject(todoList)
 
+	if (noteType === 'videoNote') {
+		noteContent = noteContent.replace('watch?v=', 'embed/')
+	}
+
 	let newNote = {
 		id: utilService.makeId(),
 		type: noteType,
@@ -109,11 +134,17 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
 				txt: noteContent,
 				title: noteTitle,
 			}
+			newNote.style = {
+				backgroundColor: '#00d',
+			}
 			return newNote
 		case 'videoNote':
 			newNote.info = {
 				url: `${noteContent}`,
 				title: noteTitle,
+			}
+			newNote.style = {
+				backgroundColor: '#00d',
 			}
 			return newNote
 		case 'imgNote':
@@ -129,6 +160,9 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
 			newNote.info = {
 				label: noteTitle,
 				todos: listTxt,
+			}
+			newNote.style = {
+				backgroundColor: '#00d',
 			}
 			return newNote
 	}
@@ -158,5 +192,6 @@ function getListTextObject(list) {
 }
 
 function updateNote(note) {
+	console.log(note)
 	return storageService.put(NOTES_KEY, note)
 }

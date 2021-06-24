@@ -39,6 +39,9 @@ export default {
 					id: this.note.id,
 					type: this.note.type,
 					info: {},
+					style: {
+						backgroundColor: this.note.style.backgroundColor,
+					},
 				}
 				if (this.note.type === 'listNote') {
 					obj.info.label = this.noteTitle
@@ -51,6 +54,9 @@ export default {
 					obj.info.todos = keepService.getListTextObject(this.noteContent.split(','))
 				} else {
 					obj.info.url = this.noteContent
+				}
+				if (this.note.type === 'videoNote') {
+					obj.info.url = this.noteContent.replace('watch?v=', 'embed/')
 				}
 
 				this.isEdit = false

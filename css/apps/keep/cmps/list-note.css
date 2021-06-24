@@ -1,19 +1,22 @@
 .list-note {
 	border: 1px solid black;
 	background-color: lightblue;
-	max-width: 300px;
-	height: 150px;
+
+	/* max-width: 300px;
+	height: 150px; */
 	margin-bottom: 5px;
 	margin-left: 10px;
 }
 
 .todo-list {
 	list-style: unset;
+	text-align: center;
 }
 
 .list-note li {
 	margin-top: 5px;
 	margin-left: 28px;
+	text-align: left;
 }
 
 .done {

@@ -1,22 +1,21 @@
-import progressBar from './progressBar.js'
+import progressBar from './mail-progress.js'
 
 export default {
 	components: {
 		progressBar,
 	},
-	props: {},
+	props: { unreadMails: Number },
 	template: `
         <aside class="mail-sidebar">
             <button @click="onCompose">+ Compose</button>
             <ul class="mail-folders">
                 <li v-for="link in links" @click="focusLink" :class="isFocused">{{link.text}}</li>
-                <progress-bar :progress="progress"/>
             </ul>
+			<progress-bar :unread-mails="unreadMails"/>
         </aside>
     `,
 	data() {
 		return {
-			progress: 0,
 			links: [{ text: 'Inbox' }, { text: 'Sent Mail' }, { text: 'Starred' }, { text: 'Drafts' }],
 		}
 	},

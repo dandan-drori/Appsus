@@ -1,8 +1,8 @@
 .img-note {
 	border: 1px solid black;
 	background-color: lightblue;
-	max-width: 300px;
-	height: 150px;
+	/* max-width: 300px; */
+	/* height: 150px; */
 	padding: 5px;
 	margin-bottom: 5px;
 }

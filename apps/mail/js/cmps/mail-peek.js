@@ -7,7 +7,7 @@ export default {
                 <section class="mail-peek-actions">
                     <button @click="onDeleteMail(mail.id)">Del</button>
                     <button @click="onForwardMail(mail.id)">Fwd</button>
-                    <button>MUr</button>
+                    <button @click="onMarkUnread(mail.id)">MUr</button>
                     <button>Ful</button>
                 </section>
             </section>
@@ -26,6 +26,9 @@ export default {
 		},
 		onForwardMail(mailId) {
 			this.$emit('forward-mail', mailId)
+		},
+		onMarkUnread(mailId) {
+			this.$emit('unread-mail', mailId)
 		},
 	},
 	computed: {

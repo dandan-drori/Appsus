@@ -11,9 +11,13 @@ export default {
         <section>
             <h2>this is keep app</h2>
 			<add-note @addNote="addNote" :note="noteToEdit" :key="key" @editNote="editNote"/>
-            <section v-if="notes" v-for="note in notes" :key="note.id">
-        <component :is="note.type"  :note="note" @remove="removeNote" @edit="onEditNote"/>
-
+			<section  class="note-container">
+            <section v-if="notes" v-for="note in notes" :key="note.id" class="notes-main">
+			
+        <component :is="note.type"  :note="note" @remove="removeNote"
+		 @edit="onEditNote" 
+		 @editColor="updateColor"/>
+		</section>
         </section>
         </section>
         
@@ -44,6 +48,7 @@ export default {
 			keepService.getNoteById(noteId).then(note => {
 				this.noteToEdit = note
 				this.key += 'a'
+				console.log(note)
 			})
 		},
 		editNote(note) {
@@ -52,10 +57,16 @@ export default {
 			})
 			console.log(note)
 		},
+		updateColor(color, noteId) {
+			keepService.getNoteById(noteId).then(note => {
+				keepService.updateColor(note, color).then(() => {
+					this.loadNotes()
+				})
+			})
+		},
 	},
 	created() {
 		// this.notes = keepService.getNotes()
-		console.log(this.notes)
 		this.loadNotes()
 	},
 	components: {

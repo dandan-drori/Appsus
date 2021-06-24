@@ -7,6 +7,8 @@ export const mailService = {
 	getMailById,
 	deleteMail,
 	addMail,
+	unreadMail,
+	readMail,
 }
 
 var gMails = _createMails()
@@ -41,12 +43,26 @@ function getMailById(mailId) {
 	return storageService.get(MAILS_KEY, mailId)
 }
 
+function unreadMail(mailId) {
+	return getMailById(mailId).then(mail => {
+		mail.isRead = false
+		return storageService.put(MAILS_KEY, mail)
+	})
+}
+
+function readMail(mailId) {
+	return getMailById(mailId).then(mail => {
+		mail.isRead = true
+		return storageService.put(MAILS_KEY, mail)
+	})
+}
+
 function _createMails() {
 	return [
-		_createMail('Wassap?', 'Pick up!'),
-		_createMail('Vue.js', 'Hello Vue'),
-		_createMail('Wat Wat!!!', 'What?'),
-		_createMail('Kidding?', "I'm joking don't worry!"),
+		_createMail(['Dandan'], ['Dandan'], 'Wassap?', 'Pick up!'),
+		_createMail(['Dandan'], ['Dandan'], 'Vue.js', 'Hello Vue'),
+		_createMail(['Dandan'], ['Dandan'], 'Wat Wat!!!', 'What?'),
+		_createMail(['Dandan'], ['Dandan'], 'Kidding?', "I'm joking don't worry!"),
 	]
 }
 
