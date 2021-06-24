@@ -22,9 +22,8 @@ export default {
 					<button title="Expand">
 						<i class="fas fa-expand"></i>
 					</button>
-					<button title="Star">
-						<i class="far fa-star"></i>
-						<!-- <i class="fas fa-star"></i> -->
+					<button title="Star" @click.stop="onToggleStar(mail.id)">
+						<i :class="[mail.isStarred ? 'fas fa-star' : 'far fa-star']"></i>
 					</button>
 				</section>
 			</section>
@@ -49,6 +48,9 @@ export default {
 		},
 		onMarkUnread(mailId) {
 			this.$emit('unread-mail', mailId)
+		},
+		onToggleStar(mailId) {
+			this.$emit('toggle-star', mailId)
 		},
 		onShowActions() {
 			this.isShowActions = true

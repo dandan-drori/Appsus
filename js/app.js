@@ -15,7 +15,7 @@ const options = {
         <main>
 			<user-msg />
             <app-header />
-            <router-view />
+            <router-view :key="$route.fullPath"/> <!-- force re-render even when underlying component doesn't change -->
             <app-footer />
         </main>
     `,

@@ -9,6 +9,7 @@ export const mailService = {
 	addMail,
 	unreadMail,
 	readMail,
+	toggleStar,
 }
 
 var gMails = _createMails()
@@ -32,6 +33,7 @@ function addMail(mailData) {
 		bcc = bcc.split(',')
 	}
 	const mail = _createMail(cc, bcc, subject, body)
+	mail.isSent = true
 	return storageService.post(MAILS_KEY, mail)
 }
 
@@ -57,16 +59,23 @@ function readMail(mailId) {
 	})
 }
 
+function toggleStar(mailId) {
+	return getMailById(mailId).then(mail => {
+		mail.isStarred = !mail.isStarred
+		return storageService.put(MAILS_KEY, mail)
+	})
+}
+
 function _createMails() {
 	return [
-		_createMail(['Dandan'], ['Dandan'], 'Wassap?', 'Pick up!'),
-		_createMail(['Dandan'], ['Dandan'], 'Vue.js', 'Hello Vue'),
-		_createMail(['Dandan'], ['Dandan'], 'Wat Wat!!!', 'What?'),
-		_createMail(['Dandan'], ['Dandan'], 'Kidding?', "I'm joking don't worry!"),
+		_createMail(undefined, ['Dandan'], ['Dandan'], 'Wassap?', 'Pick up!'),
+		_createMail(undefined, ['Dandan'], ['Dandan'], 'Vue.js', 'Hello Vue'),
+		_createMail(undefined, ['Dandan'], ['Dandan'], 'Wat Wat!!!', 'What?'),
+		_createMail(undefined, ['Dandan'], ['Dandan'], 'Kidding?', "I'm joking don't worry!"),
 	]
 }
 
-function _createMail(cc, bcc, subject, body) {
+function _createMail(to = 'Dandan', cc, bcc, subject, body) {
 	const id = utilService.makeId()
 	return {
 		id,
@@ -78,11 +87,15 @@ function _createMail(cc, bcc, subject, body) {
 			name: 'Dandan',
 			id,
 		},
+		to,
 		cc,
 		bcc,
 		subject,
 		body,
 		isRead: false,
+		isSent: false,
+		isStarred: false,
+		isDraft: false,
 		sentAt: Date.now(),
 	}
 }

@@ -2,8 +2,8 @@ import { eventBus } from '../services/event-bus-service.js'
 
 export default {
 	template: `
-        <section>
-            <input type="search" :placeholder="placeholder" v-model="filterBy.subject" @input="onSetFilter"/>
+        <section class="app-filter">
+            <input type="search" :placeholder="placeholder" v-model="filterBy.subject" @input="onSetFilter" />
             <select name="sort" v-if="app === 'mail'" v-model="sortBy" @change="onSetSort">
                 <option value="" disabled hidden>Sort</option>
                 <option>Date</option>
