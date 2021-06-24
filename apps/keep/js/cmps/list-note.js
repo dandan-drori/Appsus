@@ -12,7 +12,7 @@ export default {
                     {{todo.txt}}
 </li>
             </ul>
-			<div class="actions-container">
+			<div class="note-actions-container">
            <div class="container">
 
 			   <input type="color" v-model="color" @change="updateColor(note.id)" class="color-input">

@@ -5,7 +5,7 @@ export default {
 	
         <h2>{{note.info.title}}</h2>
        <img :src="note.info.url">
-       <div class="actions-container">
+       <div class="note-actions-container">
            <div class="container">
 
 			   <input type="color" v-model="color" @change="updateColor(note.id)" class="color-input">

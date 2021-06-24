@@ -4,7 +4,7 @@ export default {
         <div class="note text-note" :style="{backgroundColor:getColor}">
 			<h3>{{note.title}}</h3>
             <p>{{note.info.txt}}</p>
-            <div class="actions-container">
+            <div class="note-actions-container">
            <div class="container">
 
 			   <input type="color" v-model="color" @change="updateColor(note.id)" class="color-input">

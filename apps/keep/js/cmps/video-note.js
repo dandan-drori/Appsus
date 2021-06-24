@@ -9,7 +9,7 @@ export default {
             height="100"
             frameborder="0" >
            </iframe>
-		   <div class="actions-container">
+		   <div class="note-actions-container">
            <div class="container">
 
 			   <input type="color" v-model="color" @change="updateColor(note.id)" class="color-input">

@@ -4,15 +4,17 @@ export default {
   props: ['note'],
   template: `<section class="add-note">
         <h2>Add note</h2>
-        <select v-model="noteType">
-        <option value="textNote">Text</option>
-        <option value="videoNote">Video</option>
-        <option value="imgNote">Image</option>
-        <option value="listNote">List</option>
-        </select>
-        <input v-model="noteContent" :placeholder="placeholder">
+		<div class="add-container">
+		<div class="actions-container">
+		<button @click="setTypeText"><i class="fas fa-font"></i></button>
+		<button @click="setTypeVideo"><i class="fab fa-youtube"></i></button>
+		<button @click="setTypeList"><i class="fas fa-list"></i></button>
+		<button @click="setTypeImage"><i class="fas fa-images"></i></button>
+		</div>
+        <input v-model="noteContent" :placeholder="placeholder" class="text-input">
+		</div>
         <input v-model="noteTitle" placeholder="enter title">
-        <button @click="addNote" class='add-note-btn'>{{title}}</button>
+        <button @click="addNote" class='add-note-btn'><i :class="[isEdit ? 'far fa-save' : 'far fa-plus-square']"></i></button>
         
     </section>`,
   data() {
@@ -25,9 +27,11 @@ export default {
     };
   },
   computed: {
-    title() {
-      return this.isEdit ? 'Edit' : 'Add';
-    },
+    // title() {
+    //   return this.isEdit
+    //     ? '"<i class="far fa-save"></i>"'
+    //     : '"<i class="far fa-plus-square"></i>"';
+    // },
     placeholder() {
       if (this.noteType === 'textNote') {
         return 'Enter text';
@@ -84,6 +88,7 @@ export default {
         this.$emit('editNote', obj);
       }
     },
+
     edit(noteId) {
       this.$emit('edit', noteId);
     },
@@ -93,6 +98,18 @@ export default {
         str += obj.txt + ',';
       });
       return str.substring(0, str.length - 1);
+    },
+    setTypeText() {
+      this.noteType = 'textNote';
+    },
+    setTypeImage() {
+      this.noteType = 'imgNote';
+    },
+    setTypeList() {
+      this.noteType = 'listNote';
+    },
+    setTypeVideo() {
+      this.noteType = 'videoNote';
     },
   },
   created() {
