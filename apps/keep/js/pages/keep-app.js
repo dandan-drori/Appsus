@@ -1,14 +1,14 @@
-import { keepService } from '../services/keep-service.js'
-import textNote from '../cmps/text-note.js'
-import imgNote from '../cmps/img-note.js'
-import videoNote from '../cmps/video-note.js'
-import listNote from '../cmps/list-note.js'
-import addNote from '../cmps/add-note.js'
-import noteFilter from '../cmps/note-filter.js'
-import { eventBus } from '../../../../js/services/event-bus-service.js'
+import { keepService } from '../services/keep-service.js';
+import textNote from '../cmps/text-note.js';
+import imgNote from '../cmps/img-note.js';
+import videoNote from '../cmps/video-note.js';
+import listNote from '../cmps/list-note.js';
+import addNote from '../cmps/add-note.js';
+import noteFilter from '../cmps/note-filter.js';
+import { eventBus } from '../../../../js/services/event-bus-service.js';
 
 export default {
-	template: `
+  template: `
     
         <section>
             <h2>this is keep app</h2>
@@ -41,124 +41,172 @@ export default {
         
         
     `,
-	data() {
-		return {
-			notes: [],
-			noteToEdit: null,
-			key: '',
-			filterBy: null,
-		}
-	},
-	methods: {
-		loadNotes() {
-			keepService.query().then(notes => (this.notes = notes))
-		},
-		removeNote(id) {
-			keepService
-				.removeNote(id)
-				.then(() => {
-					const msg = {
-						txt: 'Deleted successfuly',
-						type: 'success',
-					}
-					eventBus.$emit('show-msg', msg)
-					this.loadNotes()
-				})
-				.catch(err => {
-					console.log(err)
-					const msg = {
-						txt: 'Error please try again!',
-						type: 'error',
-					}
-					eventBus.$emit('show-msg', msg)
-				})
-		},
-		addNote(newNote) {
-			keepService.addNewNote(newNote).then(note => {
-				this.notes.unshift(note)
-			})
-		},
-		onEditNote(noteId) {
-			keepService.getNoteById(noteId).then(note => {
-				this.noteToEdit = note
-				this.key += 'a'
-				console.log(note)
-			})
-		},
-		editNote(note) {
-			keepService.updateNote(note).then(() => {
-				this.loadNotes()
-			})
-			console.log(note)
-		},
-		updateColor(color, noteId) {
-			keepService.getNoteById(noteId).then(note => {
-				keepService.updateColor(note, color).then(() => {
-					this.loadNotes()
-				})
-			})
-		},
-		setFilter(filterBy) {
-			this.filterBy = filterBy
-		},
-		setPin(noteId) {
-			keepService.getNoteById(noteId).then(note => {
-				keepService.updatePin(note).then(() => {
-					this.loadNotes()
-				})
-			})
-		},
-	},
-	created() {
-		// this.notes = keepService.getNotes()
-		this.loadNotes()
-	},
-	components: {
-		textNote,
-		imgNote,
-		videoNote,
-		listNote,
-		addNote,
-		noteFilter,
-	},
-	computed: {
-		getPinnedNotes() {
-			let filteredNotes = this.notes.filter(note => {
-				return note.isPinned
-			})
+  data() {
+    return {
+      notes: [],
+      noteToEdit: null,
+      key: '',
+      filterBy: null,
+    };
+  },
+  methods: {
+    loadNotes() {
+      keepService.query().then((notes) => (this.notes = notes));
+    },
+    removeNote(id) {
+      keepService
+        .removeNote(id)
+        .then(() => {
+          const msg = {
+            txt: 'Deleted successfuly',
+            type: 'success',
+          };
+          eventBus.$emit('show-msg', msg);
+          this.loadNotes();
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error please try again!',
+            type: 'error',
+          };
+          eventBus.$emit('show-msg', msg);
+        });
+    },
+    addNote(newNote) {
+      keepService
+        .addNewNote(newNote)
+        .then((note) => {
+          this.notes.unshift(note);
+        })
+        .then(() => {
+          const msg = {
+            txt: 'Added successfuly',
+            type: 'success',
+          };
+          eventBus.$emit('show-msg', msg);
+          this.loadNotes();
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error please try again!',
+            type: 'error',
+          };
+          eventBus.$emit('show-msg', msg);
+        });
+    },
+    onEditNote(noteId) {
+      keepService.getNoteById(noteId).then((note) => {
+        this.noteToEdit = note;
+        this.key += 'a';
+        console.log(note);
+      });
+    },
+    editNote(note) {
+      keepService
+        .updateNote(note)
+        .then(() => {
+          const msg = {
+            txt: 'Edited successfuly',
+            type: 'success',
+          };
+          eventBus.$emit('show-msg', msg);
+          this.loadNotes();
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error please try again!',
+            type: 'error',
+          };
+          eventBus.$emit('show-msg', msg);
+        });
+      console.log(note);
+    },
+    updateColor(color, noteId) {
+      keepService.getNoteById(noteId).then((note) => {
+        keepService.updateColor(note, color).then(() => {
+          this.loadNotes();
+        });
+      });
+    },
+    setFilter(filterBy) {
+      this.filterBy = filterBy;
+    },
+    setPin(noteId) {
+      keepService.getNoteById(noteId).then((note) => {
+        keepService
+          .updatePin(note)
+          .then(() => {
+            const msg = {
+              txt: 'Pinned!',
+              type: 'success',
+            };
+            eventBus.$emit('show-msg', msg);
+            this.loadNotes();
+          })
+          .catch((err) => {
+            console.log(err);
+            const msg = {
+              txt: 'Error please try again!',
+              type: 'error',
+            };
+            eventBus.$emit('show-msg', msg);
+          });
+      });
+    },
+  },
+  created() {
+    // this.notes = keepService.getNotes()
+    this.loadNotes();
+  },
+  components: {
+    textNote,
+    imgNote,
+    videoNote,
+    listNote,
+    addNote,
+    noteFilter,
+  },
+  computed: {
+    getPinnedNotes() {
+      let filteredNotes = this.notes.filter((note) => {
+        return note.isPinned;
+      });
 
-			if (!this.filterBy || this.filterBy === '') {
-				return filteredNotes
-			}
-			filteredNotes = filteredNotes.filter(note => {
-				if (note.type === 'textNote') {
-					return note.info.txt.includes(this.filterBy)
-				}
-				if (note.type === 'listNote') {
-					return note.info.label.includes(this.filterBy)
-				} else return note.info.title.includes(this.filterBy)
-			})
+      if (!this.filterBy || this.filterBy === '') {
+        return filteredNotes;
+      }
+      filteredNotes = filteredNotes.filter((note) => {
+        if (note.type === 'textNote') {
+          return note.info.txt.includes(this.filterBy);
+        }
+        if (note.type === 'listNote') {
+          return note.info.label.includes(this.filterBy);
+        } else return note.info.title.includes(this.filterBy);
+      });
 
-			return filteredNotes
-		},
-		notesToShow() {
-			let filteredNotes = this.notes.filter(note => {
-				return !note.isPinned
-			})
+      return filteredNotes;
+    },
+    notesToShow() {
+      let filteredNotes = this.notes.filter((note) => {
+        return !note.isPinned;
+      });
 
-			if (!this.filterBy || this.filterBy === '') {
-				return filteredNotes
-			}
-			filteredNotes = filteredNotes.filter(note => {
-				if (note.type === 'textNote') {
-					return note.info.txt.includes(this.filterBy)
-				}
-				if (note.type === 'listNote') {
-					return note.info.label.includes(this.filterBy)
-				} else return note.info.title.includes(this.filterBy)
-			})
+      if (!this.filterBy || this.filterBy === '') {
+        return filteredNotes;
+      }
+      filteredNotes = filteredNotes.filter((note) => {
+        if (note.type === 'textNote') {
+          return note.info.txt.includes(this.filterBy);
+        }
+        if (note.type === 'listNote') {
+          return note.info.label.includes(this.filterBy);
+        } else return note.info.title.includes(this.filterBy);
+      });
 
-			return filteredNotes
-		},
-	},
-}
+      return filteredNotes;
+    },
+  },
+};
