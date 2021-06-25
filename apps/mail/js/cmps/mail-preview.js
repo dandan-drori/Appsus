@@ -1,4 +1,7 @@
+import longText from '../../../../js/cmps/long-text.js'
+
 export default {
+	components: { longText },
 	props: { mail: Object, recentUnread: String },
 	template: `
         <article :class="readClass" @click="markAsRead" :key="key" @mouseenter="onShowActions" @mouseleave="onHideActions">
@@ -6,7 +9,9 @@ export default {
             <section class="content">
 				<section class="text">
 					<p>{{mail.subject}}</p> 
-					<p class="body">- {{mail.body}}</p>
+					<p class="body">
+						<long-text :text="mail.body" :maxLength="40"/>
+					</p>
 				</section>
 				<p v-if="!showActions">{{formattedTime}}</p>
 				<section class="mail-preview-actions" v-if="showActions">

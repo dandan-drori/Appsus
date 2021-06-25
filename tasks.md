@@ -1,19 +1,17 @@
 # Dandan
 
-- when closing unfinished compose, save to drafts page
+- integrate <long-text /> into preview so the body text wont overflow - TODAY
 
-- apps integration - save email as a text note
+- mobile styling - TODAY + SATURDAY
 
-- mobile styling
-
-- integrate <long-text /> into preview so the body text wont overflow
+- apps integration - save email as a text note - SATURDAY
 
 # Daniel
 
-- integrate <long-txt /> component into notes to prevent overflow
+- integrate <long-txt /> component into notes to prevent overflow - TODAY
 
-- apps integration - send any note as email
+- style book app - TODAY
 
 - mobile - styling (breakpoint for input and stretch the notes)
 
-- style book app
+- apps integration - send any note as email - SATURDAY
