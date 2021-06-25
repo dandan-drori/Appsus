@@ -3,23 +3,29 @@ import { eventBus } from '../../../../js/services/event-bus-service.js'
 
 export default {
 	template: `
-        <section v-if="mail">
-            <section class="mail-peek">
-                <section class="mail-peek-header">
-                    <h2>{{mail.subject}}</h2>
-                    <button @click="closeDetails">X</button>
-                </section>
-                <section class="mail-peek-sender-info">
-                    <h4>{{mail.sender.name}}</h4>
-                    <p>{{senderMail}}</p>
-                </section>
-                <section class="mail-peek-body">
-                    <p class="mail-peek-body-text">{{mail.body}}</p>
-                </section>
-				<router-link :to="'/mail/' + nextMailId">Next Mail</router-link>
-				<router-link :to="'/mail/' + prevMailId">Prev Mail</router-link>
-            </section>
-        </section>
+		<section v-if="mail" class="mail-details">
+			<section class="mail-details-header">
+				<h2>{{mail.subject}}</h2>
+				<section class="mail-details-links">
+					<router-link :to="'/mail/' + prevMailId">
+						<i class="fas fa-arrow-left"></i>
+						Prev Mail
+					</router-link>
+					<router-link :to="'/mail/' + nextMailId">
+						Next Mail
+						<i class="fas fa-arrow-right"></i>
+					</router-link>
+				</section>
+				<button @click="closeDetails">X</button>
+			</section>
+			<section class="mail-details-sender-info">
+				<h4>{{mail.sender.name}}</h4>
+				<p>{{senderMail}}</p>
+			</section>
+			<section class="mail-details-body">
+				<p class="mail-details-body-text">{{mail.body}}</p>
+			</section>
+		</section>
     `,
 	data() {
 		return {
