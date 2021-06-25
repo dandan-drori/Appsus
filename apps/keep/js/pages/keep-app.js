@@ -5,6 +5,7 @@ import videoNote from '../cmps/video-note.js';
 import listNote from '../cmps/list-note.js';
 import addNote from '../cmps/add-note.js';
 import noteFilter from '../cmps/note-filter.js';
+
 import { eventBus } from '../../../../js/services/event-bus-service.js';
 
 export default {

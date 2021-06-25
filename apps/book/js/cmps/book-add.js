@@ -2,13 +2,15 @@ import { bookService } from '../services/book-service.js';
 
 export default {
   template: `<section>
+    <div class="add-book-title">
       <h3>Add a book:</h3>
-      <input v-model="searchWord" type="text" @input="getGoogleBooks">
-        <ul>
+      <input v-model="searchWord" type="text" @input="getGoogleBooks" placeholder="Search book" class="add-book-input">
+      </div>
+        <ul class="add-book-container">
             
-            <li v-for="googleBook in googleBooks" :key="googleBook.id">
+            <li v-for="googleBook in googleBooks" :key="googleBook.id" class="add-book">
                 {{googleBook.volumeInfo.title}}
-                <button @click="makeBook(googleBook)">+</button>
+                <button class='add-book-btn'@click="makeBook(googleBook)"><i class="far fa-plus-square"></i></button>
             </li>
         </ul>
     </section>`,

@@ -7,7 +7,7 @@ export default {
                 <p>Rate:{{review.rate}}</p>
                 <p>Read at:{{review.readAt}}</p>
                 <p>Comments:{{review.freeText}}</p>
-                <button @click="remove(review.id)">X</button>
+                <button @click="remove(review.id)"><i class="fas fa-trash"></i></button>
             </li>
         </ul>
     `,
@@ -16,6 +16,5 @@ export default {
       console.log('removing review id', reviewId);
       this.$emit('remove', reviewId);
     },
-    
   },
 };
