@@ -5,13 +5,14 @@ export default {
   template: `
 	
         <div class="note list-note" :style="{backgroundColor:getColor}">
-		
+  <div>
             <h2>{{note.info.label}}</h2>
             <ul class="todo-list">
                 <li v-for="(todo,idx) in note.info.todos" :key="todo.id" :class="isDone(idx)" @click="toggleDone(todo, idx)">
                     {{todo.txt}}
 </li>
             </ul>
+            </div>
 			<div class="note-actions-container">
            <div class="container">
 
@@ -22,7 +23,7 @@ export default {
 		   <button @click="edit(note.id)"><i class="fas fa-edit"></i></button>
            <button @click="remove(note.id)"><i class="fas fa-trash"></i></button>
 		   </div>
-        </div>
+        
     `,
   data() {
     return {

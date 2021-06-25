@@ -181,11 +181,16 @@ export default {
       }
       filteredNotes = filteredNotes.filter((note) => {
         if (note.type === 'textNote') {
-          return note.info.txt.includes(this.filterBy);
+          return note.info.txt
+            .toLowerCase()
+            .includes(this.filterBy.toLowerCase());
         }
         if (note.type === 'listNote') {
-          return note.info.label.includes(this.filterBy);
-        } else return note.info.title.includes(this.filterBy);
+          return note.info.label.toLowerCase().includes(this.filterBy);
+        } else
+          return note.info.title
+            .toLowerCase()
+            .includes(this.filterBy.toLowerCase());
       });
 
       return filteredNotes;
@@ -200,11 +205,18 @@ export default {
       }
       filteredNotes = filteredNotes.filter((note) => {
         if (note.type === 'textNote') {
-          return note.info.txt.includes(this.filterBy);
+          return note.info.txt
+            .toLowerCase()
+            .includes(this.filterBy.toLowerCase());
         }
         if (note.type === 'listNote') {
-          return note.info.label.includes(this.filterBy);
-        } else return note.info.title.includes(this.filterBy);
+          return note.info.label
+            .toLowerCase()
+            .includes(this.filterBy.toLowerCase());
+        } else
+          return note.info.title
+            .toLowerCase()
+            .includes(this.filterBy.toLowerCase());
       });
 
       return filteredNotes;

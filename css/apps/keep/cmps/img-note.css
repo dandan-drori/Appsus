@@ -3,11 +3,14 @@
   background-color: lightblue;
   max-width: 300px;
   height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
   padding: 5px;
   margin-bottom: 5px;
 }
 
 img {
-  height: 80px;
+  width: 90%;
   object-fit: cover;
 }

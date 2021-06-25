@@ -2,9 +2,10 @@ export default {
   props: ['note'],
   template: `
     <div class="note img-note" :style="{backgroundColor:getColor}">
-	
+  <div>
         <h2>{{note.info.title}}</h2>
        <img :src="note.info.url">
+       </div>
        <div class="note-actions-container">
            <div class="container">
 
@@ -15,7 +16,7 @@ export default {
 		   <button @click="edit(note.id)"><i class="fas fa-edit"></i></button>
            <button @click="remove(note.id)"><i class="fas fa-trash"></i></button>
 		   </div>
-        </div>
+        
     `,
   data() {
     return {

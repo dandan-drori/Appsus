@@ -2,6 +2,10 @@
   border: 1px solid black;
   background-color: lightblue;
   min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .text-note h3 {

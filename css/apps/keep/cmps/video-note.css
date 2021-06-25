@@ -1,12 +1,10 @@
 .video-note {
   border: 1px solid black;
-  /* display: flex;
-  flex-direction: column; */
   background-color: lightblue;
-  /* min-width: 300px; */
 
-  /* min-height: 200px; */
-  /* padding: 5px; */
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .video-note h2 {

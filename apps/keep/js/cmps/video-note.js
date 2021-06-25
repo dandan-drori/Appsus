@@ -2,6 +2,7 @@ export default {
   props: ['note'],
   template: `
     <div class="note video-note" :style="{backgroundColor:getColor}">
+      <div>
         <h2>{{note.info.title}}</h2>
         <iframe
             :src="note.info.url"
@@ -9,6 +10,7 @@ export default {
             height="100"
             frameborder="0" >
            </iframe>
+</div>
 		   <div class="note-actions-container">
            <div class="container">
 
@@ -19,7 +21,7 @@ export default {
 		   <button @click="edit(note.id)"><i class="fas fa-edit"></i></button>
            <button @click="remove(note.id)"><i class="fas fa-trash"></i></button>
 		   </div>
-</div>
+
     `,
   data() {
     return {
