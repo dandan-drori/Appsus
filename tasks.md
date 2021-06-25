@@ -2,6 +2,8 @@
 
 - add a default "To" for reply/forward
 
+- fix unread mail bug
+
 - switch between open and closed envelope when marking as unread
 
 - when closing unfinished compose, save to drafts page

@@ -34,7 +34,7 @@ function addMail(mailData) {
 	if (bcc.indexOf(',') !== -1) {
 		bcc = bcc.split(',')
 	}
-	const mail = _createMail(cc, bcc, subject, body)
+	const mail = _createMail(undefined, cc, bcc, subject, body)
 	mail.isSent = true
 	return storageService.post(MAILS_KEY, mail)
 }

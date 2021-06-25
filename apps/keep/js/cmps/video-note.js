@@ -1,6 +1,6 @@
 export default {
-  props: ['note'],
-  template: `
+	props: ['note'],
+	template: `
     <div class="note video-note" :style="{backgroundColor:getColor}">
       <div>
         <h2>{{note.info.title}}</h2>
@@ -21,41 +21,41 @@ export default {
 		   <button @click="edit(note.id)"><i class="fas fa-edit"></i></button>
            <button @click="remove(note.id)"><i class="fas fa-trash"></i></button>
 		   </div>
+</div>
 
     `,
-  data() {
-    return {
-      color: this.note.style.backgroundColor,
-    };
-  },
-  methods: {
-    remove(noteId) {
-      this.$emit('remove', noteId);
-    },
-    updateColor(noteId) {
-      this.$emit('editColor', this.color, noteId);
-    },
-    edit(noteId) {
-      this.$emit('edit', noteId);
-    },
-    pinNote(noteId) {
-      this.$emit('setPin', noteId);
-    },
-  },
-  computed: {
-    getColor() {
-      console.log(this.note);
-      return this.note.style.backgroundColor;
-    },
-    getPinColor() {
-      if (this.note.isPinned) {
-        return { pinned: true };
-      } else {
-        return { pinned: false };
-      }
-    },
-    title() {
-      return this.note.isPinned ? 'Unpin' : 'pin';
-    },
-  },
-};
+	data() {
+		return {
+			color: this.note.style.backgroundColor,
+		}
+	},
+	methods: {
+		remove(noteId) {
+			this.$emit('remove', noteId)
+		},
+		updateColor(noteId) {
+			this.$emit('editColor', this.color, noteId)
+		},
+		edit(noteId) {
+			this.$emit('edit', noteId)
+		},
+		pinNote(noteId) {
+			this.$emit('setPin', noteId)
+		},
+	},
+	computed: {
+		getColor() {
+			return this.note.style.backgroundColor
+		},
+		getPinColor() {
+			if (this.note.isPinned) {
+				return { pinned: true }
+			} else {
+				return { pinned: false }
+			}
+		},
+		title() {
+			return this.note.isPinned ? 'Unpin' : 'pin'
+		},
+	},
+}

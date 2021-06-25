@@ -2,7 +2,7 @@ import { eventBus } from '../services/event-bus-service.js'
 
 export default {
 	template: `
-        <section class="app-filter" >
+        <section class="app-filter">
             <input v-if="app !== ''" type="search" :placeholder="placeholder" v-model="filterBy.subject" @input="onSetFilter" />
             <select name="sort" v-if="onlyMail" v-model="sortBy" @change="onSetSort">
                 <option value="" disabled hidden>Sort</option>
@@ -24,7 +24,6 @@ export default {
 			},
 			sortBy: 'Date',
 			read: 'All',
-			key: this.initialKey || 0,
 		}
 	},
 	methods: {

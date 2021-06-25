@@ -8,4 +8,5 @@
 
 .mail-app {
 	display: flex;
+	padding: 3px 0;
 }
