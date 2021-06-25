@@ -1,14 +1,10 @@
-.home-page {
-	/* padding: 30px 0; */
-}
-
 .home-page .mail,
 .home-page .notes,
 .home-page .books {
 	display: flex;
 	justify-content: space-between;
 	padding: 0 80px;
-	/* box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2); */
+	min-height: 180px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
@@ -31,7 +27,6 @@
 	border-radius: 7px;
 	width: fit-content;
 	border: 2px solid #050505;
-	/* background-color: #050505; */
 }
 
 .home-page .mail .home-page-content a:hover {
@@ -51,7 +46,7 @@
 .home-page .notes h2,
 .home-page .books h2 {
 	font-family: 'Ubuntu-Bold';
-	margin-top: 47px;
+	margin-top: 27px;
 	margin-bottom: 10px;
 }
 
@@ -68,6 +63,5 @@
 
 .home-page img {
 	width: 160px;
-	/* height: 160px; */
-	height: calc((100vh - 120px) / 3);
+	/* height: calc((100vh - 120px) / 3); */
 }
