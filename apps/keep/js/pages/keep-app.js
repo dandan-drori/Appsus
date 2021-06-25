@@ -10,10 +10,10 @@ import { eventBus } from '../../../../js/services/event-bus-service.js';
 export default {
   template: `
     
-        <section>
+        <section class="main-content main-app">
             <h2>this is keep app</h2>
 
-			<note-filter @filtered="setFilter"/>
+		
 
 			<add-note @addNote="addNote" :note="noteToEdit" :key="key" @editNote="editNote"/>
 
@@ -160,6 +160,7 @@ export default {
   created() {
     // this.notes = keepService.getNotes()
     this.loadNotes();
+    eventBus.$on('set-filter-keep', this.setFilter);
   },
   components: {
     textNote,

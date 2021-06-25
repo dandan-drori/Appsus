@@ -3,7 +3,7 @@ import { keepService } from '../services/keep-service.js';
 export default {
   props: ['note'],
   template: `<section class="add-note">
-        <h2>Add note</h2>
+        
 		<div class="add-container">
 		<div class="actions-container">
 		<button @click="setTypeText"><i class="fas fa-font"></i></button>
@@ -13,14 +13,14 @@ export default {
 		</div>
         <input v-model="noteContent" :placeholder="placeholder" class="text-input">
 		</div>
-        <input v-model="noteTitle" placeholder="enter title">
+        <input v-model="noteTitle" placeholder="enter title" class="title-input">
         <button @click="addNote" class='add-note-btn'><i :class="[isEdit ? 'far fa-save' : 'far fa-plus-square']"></i></button>
         
     </section>`,
   data() {
     return {
       // noteToAdd: null,
-      noteType: null,
+      noteType: 'textNote',
       noteContent: null,
       noteTitle: null,
       isEdit: false,

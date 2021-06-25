@@ -148,7 +148,7 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
         txt: noteContent,
       };
       newNote.style = {
-        backgroundColor: '#00d',
+        backgroundColor: 'lightblue',
       };
       return newNote;
     case 'videoNote':
@@ -157,7 +157,7 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
         title: noteTitle,
       };
       newNote.style = {
-        backgroundColor: '#00d',
+        backgroundColor: 'lightblue',
       };
       return newNote;
     case 'imgNote':
@@ -166,7 +166,7 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
         title: noteTitle,
       };
       newNote.style = {
-        backgroundColor: '#00d',
+        backgroundColor: 'lightblue',
       };
       return newNote;
     case 'listNote':
@@ -175,7 +175,7 @@ function getEmptyNote(noteType, noteTitle, noteContent) {
         todos: listTxt,
       };
       newNote.style = {
-        backgroundColor: '#00d',
+        backgroundColor: 'lightblue',
       };
       return newNote;
   }
