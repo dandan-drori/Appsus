@@ -1,13 +1,15 @@
 import mailPreview from './mail-preview.js'
 import mailPeek from './mail-peek.js'
+import mailPreviewMobile from './mail-preview-mobile.js'
 
 export default {
-	components: { mailPreview, mailPeek },
+	components: { mailPreview, mailPeek, mailPreviewMobile },
 	props: { mails: Array, selectedMail: String, recentUnread: String },
 	template: `
         <section class="mail-list">
             <article v-for="mail in mails" class="mail-item" :key="mail.id">
-                <mail-preview :mail="mail" @click.native="onSelectMail(mail.id)" class="mail-preview" @read-mail="onReadMail(mail.id)" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
+                <mail-preview v-if="!isMobile" :mail="mail" @click.native="onSelectMail(mail.id)" class="mail-preview" @read-mail="onReadMail(mail.id)" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
+                <mail-preview-mobile v-else :mail="mail" @click.native="onSelectMail(mail.id)" class="mail-preview" @read-mail="onReadMail(mail.id)" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
                 <mail-peek v-if="isSelected(mail.id)" :mail="mail" class="mail-peek" />
             </article>
         </section>
@@ -39,6 +41,11 @@ export default {
 		},
 		openPeek(mailId) {
 			this.$emit('open-peek', mailId)
+		},
+	},
+	computed: {
+		isMobile() {
+			return screen.width < 768
 		},
 	},
 }

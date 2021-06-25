@@ -5,18 +5,19 @@ export default {
 	props: { mail: Object, recentUnread: String },
 	template: `
         <article :class="readClass" @click="markAsRead" @mouseenter="onShowActions" @mouseleave="onHideActions">
+            <section class="content-mobile">
             <p>
                 <long-text :text="mail.sender.name" :maxLength="20"/>
 			</p>
-            <section class="content-mobile">
-				<section class="text">
+				<section class="text-mobile">
 					<p>
 						<long-text :text="mail.subject" :maxLength="20"/>
 					</p> 
 					<p class="body">
-						<long-text :text="'- ' + mail.body" :maxLength="40"/>
+						<long-text :text="mail.body" :maxLength="40"/>
 					</p>
 				</section>
+			</section>
 				<p v-if="!showActions">{{formattedTime}}</p>
 				<section class="mail-preview-actions" v-if="showActions">
 					<button @click.stop="onDeleteMail(mail.id)" title="Delete">
@@ -35,7 +36,6 @@ export default {
 						<i :class="[mail.isStarred ? 'fas fa-star' : 'far fa-star']"></i>
 					</button>
 				</section>
-			</section>
         </article>
     `,
 	data() {
