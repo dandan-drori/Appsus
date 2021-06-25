@@ -56,3 +56,10 @@
 	color: #cc0000;
 	background-color: rgba(255, 0, 0, 0.1);
 }
+
+@media (max-width: 768px) {
+	.mail-sidebar {
+		position: absolute;
+		transform: translateX(-130%);
+	}
+}

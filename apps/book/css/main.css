@@ -1,73 +1,61 @@
-* {
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
 .book-header p {
-  color: black;
+	color: black;
 }
 
 .book-details img {
-  max-width: 100px;
+	max-width: 100px;
 }
 
 .red {
-  color: red;
+	color: red;
 }
 .green {
-  color: green;
+	color: green;
 }
 /* App */
 
-ul {
-  list-style: none;
-}
-
-li {
-  text-align: center;
+.add-books-list li {
+	text-align: center;
 }
 
 /* List */
 
 .book-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 /* Preview */
 .book-preview-container {
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: 15px;
-  padding: 10px;
-  background-color: rgb(40, 168, 207);
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 15px;
+	padding: 10px;
+	background-color: rgb(40, 168, 207);
 
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	width: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .book-preview {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* flex-wrap: wrap; */
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* flex-wrap: wrap; */
 }
 
 .book-preview img {
-  max-width: 90px;
-  max-height: 100px;
-  margin-bottom: 30px;
-  align-items: center;
+	max-width: 90px;
+	max-height: 100px;
+	margin-bottom: 30px;
+	align-items: center;
 }
 
 /* .app-header {
@@ -81,114 +69,114 @@ li {
 } */
 
 .book-price {
-  color: #003060;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+	color: #003060;
+	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 /* Header */
 
 /* Details */
 .book-details {
-  text-align: center;
+	text-align: center;
 }
 
 .book-details p {
-  font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .text {
-  font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 .show-more-btn {
-  border-radius: 6px;
-  height: 30px;
-  cursor: pointer;
+	border-radius: 6px;
+	height: 30px;
+	cursor: pointer;
 }
 
 .show-more-btn:hover {
-  background-color: #0e86d4;
+	background-color: #0e86d4;
 }
 .close-btn {
-  margin: 6px 0;
-  border-radius: 6px;
+	margin: 6px 0;
+	border-radius: 6px;
 }
 
 .close-btn:hover {
-  background-color: #0e86d4;
+	background-color: #0e86d4;
 }
 
 .app-header {
-  background-color: #055c9d;
-  padding: 10px;
-  border-bottom: 1px solid black;
-  text-align: center;
-  color: white;
+	background-color: #055c9d;
+	padding: 10px;
+	border-bottom: 1px solid black;
+	text-align: center;
+	color: white;
 }
 
 .title {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 pre {
-  background-color: lightgreen;
-  text-align: center;
-  height: 40px;
-  padding: 15px;
+	background-color: lightgreen;
+	text-align: center;
+	height: 40px;
+	padding: 15px;
 }
 
 .categories {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .categories > li {
-  align-self: center;
+	align-self: center;
 }
 /* Filter */
 
 section .book-filter {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  border-bottom: 1px solid black;
-  background-color: #003060;
-  color: white;
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+	border-bottom: 1px solid black;
+	background-color: #003060;
+	color: white;
 }
 
 input {
-  border-radius: 6px;
+	border-radius: 6px;
 }
 
 /* Footer */
 
 .app-footer {
-  text-align: center;
-  border-top: 1px solid black;
-  background-color: #055c9d;
-  padding: 30px;
-  color: white;
+	text-align: center;
+	border-top: 1px solid black;
+	background-color: #055c9d;
+	padding: 30px;
+	color: white;
 }
 
 /* Edit */
 
 .book-review form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 /* Review */
 
 .review-container {
-  border: 1px solid black;
+	border: 1px solid black;
 }
 
 .book-img {
-  max-width: 150px;
+	max-width: 150px;
 }
 
 .next-btn {
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid black;
-  margin-right: 5px;
+	background-color: #fff;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-right: 5px;
 }
