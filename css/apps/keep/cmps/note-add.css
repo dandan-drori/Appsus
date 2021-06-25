@@ -1,25 +1,30 @@
 .add-note {
   display: flex;
-  justify-content: space-between;
-  background-color: lightcoral;
+  justify-content: center;
+  background-color: whitesmoke;
 }
 
 .add-note-btn {
   border: 1px solid black;
-  width: 60px;
+  width: 39px;
   border-radius: 5px;
   background-color: whitesmoke;
+  border: none;
+  font-size: 2rem;
 }
 
 .add-note input {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border: none;
+
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2),
+    0px -1px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
 .actions-container {
   position: absolute;
   right: 0;
   top: -3%;
+  margin-right: 11px;
 }
 
 .actions-container button {
@@ -27,6 +32,10 @@
 }
 .actions-container button i {
   font-size: 1rem;
+  color: grey;
+}
+.actions-container button i:hover {
+  color: black;
 }
 
 .add-container {
@@ -36,8 +45,14 @@
 .text-input {
   padding: 7px;
   width: 450px;
+  border-radius: 5px 0px 0px 5px;
+  height: 36px;
 }
 
+.title-input {
+  padding: 10px;
+  border-radius: 0px 5px 5px 0px;
+}
 .note-actions-container {
   margin-top: 5px;
   display: flex;

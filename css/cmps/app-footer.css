@@ -1,4 +1,8 @@
 .main-footer {
-	height: 5vh;
-	background-color: lightgreen;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 5vh;
+  background-color: lightgreen;
 }

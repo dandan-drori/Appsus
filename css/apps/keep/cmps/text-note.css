@@ -3,3 +3,10 @@
   background-color: lightblue;
   min-height: 150px;
 }
+
+.text-note h3 {
+  margin: 10px auto;
+}
+.text-note p {
+  margin-bottom: 10px;
+}
