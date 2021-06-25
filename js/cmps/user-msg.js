@@ -3,9 +3,8 @@ import { eventBus } from '../services/event-bus-service.js'
 export default {
 	template: `
         <div v-if="msg" class="user-msg" :class="msg.type">
-            <p>{{icon}}</p>
+			<i :class="icon"></i>
             <div class="user-msg-content">
-                <h3>{{header}}</h3>
                 <p>{{msg.txt}}</p>
             </div>
             <div class="user-msg-actions">
@@ -16,7 +15,11 @@ export default {
     `,
 	data() {
 		return {
-			msg: null,
+			// msg: null,
+			msg: {
+				type: 'success',
+				txt: 'hellooo',
+			},
 		}
 	},
 	created() {
@@ -34,11 +37,10 @@ export default {
 		},
 	},
 	computed: {
-		header() {
-			return this.msg.type === 'success' ? 'SUCCESS!' : 'ERROR!'
-		},
 		icon() {
-			return this.msg.type === 'success' ? 'V' : 'X'
+			return this.msg.type === 'success'
+				? { 'fas fa-check': true, success: true }
+				: { 'fas fa-times': true }
 		},
 	},
 }
