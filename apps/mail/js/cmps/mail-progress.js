@@ -5,6 +5,7 @@ export default {
     `,
 	computed: {
 		progress() {
+			if (!this.readMails || !this.mails.length) return 0
 			return ((100 / this.mails.length) * this.readMails).toFixed(0)
 		},
 	},

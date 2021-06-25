@@ -3,13 +3,13 @@ import { eventBus } from '../services/event-bus-service.js'
 export default {
 	template: `
         <section class="app-filter">
-            <input type="search" :placeholder="placeholder" v-model="filterBy.subject" @input="onSetFilter" />
-            <select name="sort" v-if="app === 'mail'" v-model="sortBy" @change="onSetSort">
+            <input v-if="app !== ''" type="search" :placeholder="placeholder" v-model="filterBy.subject" @input="onSetFilter" />
+            <select name="sort" v-if="onlyMail" v-model="sortBy" @change="onSetSort">
                 <option value="" disabled hidden>Sort</option>
                 <option>Date</option>
                 <option>Title</option>
             </select>
-            <select name="sort" v-if="app === 'mail'" v-model="read" @change="onSetRead">
+            <select name="sort" v-if="onlyMail" v-model="read" @change="onSetRead">
                 <option selected>All</option>
                 <option>Read</option>
                 <option>Unread</option>
@@ -31,7 +31,7 @@ export default {
 			if (this.app !== 'books' && this.app !== 'keep') {
 				eventBus.$emit('set-filter-mail', this.filterBy)
 			} else if (this.app === 'keep') {
-				eventBus.$emit('set-filter-keep', this.filterBy)
+				eventBus.$emit('set-filter-keep', this.filterBy.subject)
 			}
 		},
 		onSetSort() {
@@ -61,6 +61,9 @@ export default {
 				case 'draft':
 					return 'Search drafts'
 			}
+		},
+		onlyMail() {
+			return this.app !== 'keep' && this.app !== 'book'
 		},
 	},
 	created() {

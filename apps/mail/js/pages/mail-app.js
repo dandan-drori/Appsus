@@ -1,6 +1,7 @@
 import mailList from '../cmps/mail-list.js'
 import mailCompose from '../cmps/mail-compose.js'
 import mailSidebar from '../cmps/mail-sidebar.js'
+import mailDetails from './mail-details.js'
 import { mailService } from '../services/mail-service.js'
 import { eventBus } from '../../../../js/services/event-bus-service.js'
 
@@ -9,12 +10,14 @@ export default {
 		mailSidebar,
 		mailList,
 		mailCompose,
+		mailDetails,
 	},
 	template: `
         <section class="mail-app main-app">
             <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails"/>
-            <mail-list v-if="mails && !isComposing" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar"/>
+            <mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail"/>
 			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
+			<mail-details v-if="mail"  />
         </section>
     `,
 	data() {
@@ -28,6 +31,7 @@ export default {
 			filterBy: null,
 			sortBy: null,
 			read: null,
+			mail: null,
 		}
 	},
 	methods: {
@@ -109,6 +113,16 @@ export default {
 				this.loadMails()
 			})
 		},
+		onExpandMail(mailId) {
+			mailService.getMailById(mailId).then(mail => {
+				this.mail = mail
+				this.$router.push(`/mail/${mail.id}`).catch(() => {})
+			})
+		},
+		onCloseMail() {
+			this.mail = null
+			this.$router.push('/mail').catch(() => {})
+		},
 		openCompose() {
 			this.isComposing = true
 		},
@@ -167,5 +181,19 @@ export default {
 		eventBus.$on('set-read-mail', read => {
 			this.read = read
 		})
+		eventBus.$on('close-details', this.onCloseMail)
+	},
+	watch: {
+		'$route.params.mailId': {
+			immediate: true,
+			handler() {
+				if (!Object.keys(this.$route.params).length) return
+				const { mailId } = this.$route.params
+				mailService.getMailById(mailId).then(mail => {
+					this.mail = mail
+					this.$router.push(`/mail/${mailId}`).catch(() => {})
+				})
+			},
+		},
 	},
 }

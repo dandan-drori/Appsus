@@ -12,6 +12,10 @@ const routes = [
 		component: mailPage,
 	},
 	{
+		path: '/mail/:mailId',
+		component: mailPage,
+	},
+	{
 		path: '/mail/sent',
 		component: mailPage,
 	},

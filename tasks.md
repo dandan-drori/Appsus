@@ -1,16 +1,16 @@
 # Dandan
 
-- full screen button for emails
+- add a default "To" for reply/forward
 
 - switch between open and closed envelope when marking as unread
 
 - when closing unfinished compose, save to drafts page
 
+- eventBus - <user-msg /> (after add / edit / delete - show the user a custom message)
+
 - apps integration - save email as a text note
 
 - styling
-
-- eventBus - <user-msg /> (after add / edit / delete - show the user a custom message)
 
 - integrate <long-text /> into preview so the body text wont overflow
 
@@ -21,3 +21,5 @@
 - apps integration - send any note as email
 
 - styling
+
+- bring miss-book app into the project in a different route

@@ -19,7 +19,7 @@ export default {
 					<button @click.stop="onMarkUnread(mail.id)" title="Mark as Unread">
 						<i class="fas fa-envelope-open"></i>
 					</button>
-					<button title="Expand">
+					<button title="Expand" @click.stop="onExpandMail(mail.id)">
 						<i class="fas fa-expand"></i>
 					</button>
 					<button title="Star" @click.stop="onToggleStar(mail.id)">
@@ -51,6 +51,9 @@ export default {
 		},
 		onToggleStar(mailId) {
 			this.$emit('toggle-star', mailId)
+		},
+		onExpandMail(mailId) {
+			this.$emit('expand-mail', mailId)
 		},
 		onShowActions() {
 			this.isShowActions = true

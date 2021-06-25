@@ -10,6 +10,8 @@ export const mailService = {
 	unreadMail,
 	readMail,
 	toggleStar,
+	getNextMailId,
+	getPrevMailId,
 }
 
 var gMails = _createMails()
@@ -63,6 +65,20 @@ function toggleStar(mailId) {
 	return getMailById(mailId).then(mail => {
 		mail.isStarred = !mail.isStarred
 		return storageService.put(MAILS_KEY, mail)
+	})
+}
+
+function getNextMailId(mailId) {
+	return getMails().then(mails => {
+		const idx = mails.findIndex(mail => mail.id === mailId)
+		return idx === mails.length - 1 ? mails[0].id : mails[idx + 1].id
+	})
+}
+
+function getPrevMailId(mailId) {
+	return getMails().then(mails => {
+		const idx = mails.findIndex(mail => mail.id === mailId)
+		return idx === 0 ? mails[mails.length - 1].id : mails[idx - 1].id
 	})
 }
 
