@@ -60,6 +60,8 @@ export default {
 	created() {
 		if (this.mail) {
 			const { cc, bcc, subject, body } = this.mail
+			this.mailData.to = 'Dandan'
+			if (this.mail.to) this.mailData.to = this.mail.to
 			this.mailData.cc = cc
 			this.mailData.bcc = bcc
 			this.mailData.subject = 'Re: ' + subject

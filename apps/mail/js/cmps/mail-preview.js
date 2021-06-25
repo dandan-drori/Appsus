@@ -38,7 +38,9 @@ export default {
 	methods: {
 		markAsRead() {
 			this.$emit('read-mail', this.mail.id)
-			if (this.recentUnread !== this.mail.id) this.key++
+			if (this.recentUnread === this.mail.id) {
+				this.$emit('open-peek', this.mail.id)
+			}
 		},
 		onDeleteMail(mailId) {
 			this.$emit('delete-mail', mailId)

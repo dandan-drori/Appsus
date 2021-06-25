@@ -15,7 +15,7 @@ export default {
 	template: `
         <section class="mail-app main-app">
             <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails"/>
-            <mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail"/>
+            <mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
 			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
 			<mail-details v-if="mail"  />
         </section>
@@ -77,7 +77,12 @@ export default {
 		onDeleteMail(mailId) {
 			mailService.deleteMail(mailId).then(() => {
 				this.loadMails()
-				eventBus.$emit('show-msg', { type: 'success', txt: 'wow!' })
+				const msg = {
+					type: 'success',
+					txt: 'mail deleted',
+					link: '/mail',
+				}
+				eventBus.$emit('show-msg', msg)
 			})
 		},
 		onForwardMail(mailId) {
@@ -90,6 +95,12 @@ export default {
 			mailService.addMail(mailData).then(mail => {
 				this.closeCompose()
 				this.loadMails()
+				const msg = {
+					type: 'success',
+					txt: 'mail sent',
+					link: '/mail',
+				}
+				eventBus.$emit('show-msg', msg)
 			})
 		},
 		onUnreadMail(mailId) {
@@ -111,6 +122,12 @@ export default {
 		onToggleStar(mailId) {
 			mailService.toggleStar(mailId).then(() => {
 				this.loadMails()
+				const msg = {
+					type: 'success',
+					txt: 'mail starred',
+					link: '/mail',
+				}
+				eventBus.$emit('show-msg', msg)
 			})
 		},
 		onExpandMail(mailId) {
@@ -129,6 +146,12 @@ export default {
 		closeCompose() {
 			this.mailToForward = null
 			this.isComposing = false
+		},
+		openPeek(mailId) {
+			this.recentUnread = null
+			setTimeout(() => {
+				this.selectedMail = mailId
+			}, 0)
 		},
 	},
 	computed: {
