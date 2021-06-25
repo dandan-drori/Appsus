@@ -1,7 +1,7 @@
 export default {
-	template: `
+  template: `
         <footer class="main-footer">
-            <h2>i am footer</h2>
+            <small>Made with ❤️ by Daniel and Dandan</small>
         </footer>
     `,
-}
+};

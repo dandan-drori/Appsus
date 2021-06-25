@@ -1,14 +1,14 @@
 .add-note {
   display: flex;
   justify-content: center;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
 }
 
 .add-note-btn {
   border: 1px solid black;
   width: 39px;
   border-radius: 5px;
-  background-color: whitesmoke;
+
   border: none;
   font-size: 2rem;
 }
@@ -44,6 +44,7 @@
 
 .text-input {
   padding: 7px;
+  padding-right: 150px;
   width: 450px;
   border-radius: 5px 0px 0px 5px;
   height: 36px;

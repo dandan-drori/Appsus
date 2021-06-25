@@ -11,7 +11,7 @@ export default {
   template: `
     
         <section class="main-content main-app">
-            <h2>this is keep app</h2>
+            
 
 		
 

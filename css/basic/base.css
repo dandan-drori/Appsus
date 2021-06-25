@@ -1,27 +1,31 @@
 html {
-	font-family: 'Roboto-Regular';
+  font-family: 'Roboto-Regular';
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-	border: none;
-	outline: none;
-	background: none;
-	cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
 }
 
 input {
-	outline: none;
-	border: none;
+  outline: none;
+  border: none;
 }
 
 h1,
@@ -30,5 +34,5 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'Roboto-Bold';
+  font-family: 'Roboto-Bold';
 }

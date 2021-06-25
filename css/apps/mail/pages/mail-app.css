@@ -7,5 +7,6 @@
 @import './mail-details.css';
 
 .mail-app {
-	display: flex;
+  display: flex;
+  padding: 40px 0;
 }
