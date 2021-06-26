@@ -53,6 +53,7 @@
 .title-input {
   padding: 10px;
   border-radius: 0px 5px 5px 0px;
+  height: 36px;
 }
 .note-actions-container {
   margin-top: 5px;
@@ -76,5 +77,8 @@
   }
   .add.note-btn {
     margin-left: 5px;
+  }
+  input {
+    padding: 1px;
   }
 }
