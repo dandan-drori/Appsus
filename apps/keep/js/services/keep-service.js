@@ -9,6 +9,7 @@ export const keepService = {
   getListTextObject,
   updateColor,
   updatePin,
+  addMail,
 };
 
 import { storageService } from '../../../../js/services/async-storage-service.js';
@@ -197,4 +198,6 @@ function updateNote(note) {
   return storageService.put(NOTES_KEY, note);
 }
 
-function addMail(mail) {}
+function addMail(mail) {
+  console.log(mail);
+}
