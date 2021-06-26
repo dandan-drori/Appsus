@@ -5,9 +5,9 @@ export default {
 	template: `
         <header class="main-header">
             <div class="main-header-content">
-                <router-link to="/" class="main-logo"><img src="/imgs/logo.jpg" class="logo"/></router-link>
+                <router-link to="/" class="main-logo"><img src="https://i.ibb.co/hYxD3x4/logo.png" class="logo"/></router-link>
                 <i class="fas fa-th" @click="toggleMenu"></i>
-                <nav class="main-nav" v-if="isMenuOpen">
+                <nav class="main-nav" v-if="isOpen">
                     <router-link to="/">
                         <i class="fas fa-home" @click="toggleMenu"></i>
                         <p @click="toggleMenu">Home</p>
@@ -38,5 +38,13 @@ export default {
 		toggleMenu() {
 			this.isMenuOpen = !this.isMenuOpen
 		},
+	},
+	computed: {
+		isOpen() {
+			return this.isMenuOpen
+		},
+	},
+	created() {
+		this.isMenuOpen = false
 	},
 }

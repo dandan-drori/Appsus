@@ -45,7 +45,7 @@ export default {
 	},
 	computed: {
 		isMobile() {
-			if (screen.width < 768) return true
+			return screen.width < 768 ? true : false
 		},
 	},
 }

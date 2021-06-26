@@ -14,7 +14,7 @@ const options = {
 		appHeaderMobile,
 	},
 	template: `
-        <main>
+        <main :key="key">
 			<user-msg />
 			<app-header-mobile v-if="isMobile"/>
             <app-header v-else/>
@@ -22,8 +22,25 @@ const options = {
             <app-footer />
         </main>
     `,
+	data() {
+		return {
+			key: 0,
+		}
+	},
+	methods: {
+		handleResize(e) {
+			this.key++
+		},
+	},
+	created() {
+		window.addEventListener('resize', this.handleResize)
+	},
+	destroyed() {
+		window.removeEventListener('resize', this.handleResize)
+	},
 	computed: {
 		isMobile() {
+			this.key++
 			return screen.width < 768
 		},
 	},

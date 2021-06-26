@@ -10,7 +10,7 @@ export default {
                         <i class="fas fa-arrow-right"></i>
                     </router-link>
                 </section>
-                <img src="../../imgs/google.png" alt="gmail" />
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fgoogle-new-logos-1%2F32%2Fgmail_new_logo-512.png&f=1&nofb=1" alt="gmail" />
             </section>
             <section class="notes">
                 <section class="home-page-content">
@@ -21,7 +21,7 @@ export default {
                         <i class="fas fa-arrow-right"></i>
                     </router-link>
                 </section>
-                <img src="../../imgs/note.png" alt="note" />
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmaxcdn.icons8.com%2FShare%2Ficon%2FLogos%2Fgoogle_keep1600.png&f=1&nofb=1" alt="note" />
             </section>
             <section class="books">
                 <section class="home-page-content">
@@ -32,7 +32,7 @@ export default {
                         <i class="fas fa-arrow-right"></i>
                     </router-link>
                 </section>
-                <img src="../../imgs/book.png" alt="books" />
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fopenclipart.org%2Fimage%2F2400px%2Fsvg_to_png%2F275692%2F1489798288.png&f=1&nofb=1" alt="books" />
             </section>
         </section>
     `,

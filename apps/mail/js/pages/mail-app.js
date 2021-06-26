@@ -15,7 +15,7 @@ export default {
 		mobileNav,
 	},
 	template: `
-        <section class="mail-app main-app">
+        <section class="mail-app main-app" :key="key">
 			<div :class="backdropClass" @click="closeNav"></div>
             <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails" :is-open="isNavOpen"/>
 			<div v-if="isMobile && !isComposing && !mail" class="container-mobile" >
@@ -40,6 +40,7 @@ export default {
 			read: null,
 			mail: null,
 			isNavOpen: false,
+			key: 0,
 		}
 	},
 	methods: {
@@ -179,6 +180,9 @@ export default {
 		closeNav() {
 			this.isNavOpen = false
 		},
+		handleResize(e) {
+			this.key++
+		},
 	},
 	computed: {
 		mailsToShow() {
@@ -213,6 +217,7 @@ export default {
 			}
 		},
 		isMobile() {
+			this.key++
 			return screen.width < 768
 		},
 		backdropClass() {
@@ -239,6 +244,10 @@ export default {
 		eventBus.$on('close-details', this.onCloseMail)
 		eventBus.$on('send-note-as-mail', this.saveNote)
 		eventBus.$on('open-nav', this.openNav)
+		window.addEventListener('resize', this.handleResize)
+	},
+	destroyed() {
+		window.removeEventListener('resize', this.handleResize)
 	},
 	watch: {
 		'$route.params.mailId': {
