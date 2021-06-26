@@ -13,19 +13,19 @@ export default {
           </div>
         <div class="note-actions-container">
             <div class="container">
-              <input type="color" v-model="color" @change="updateColor(note.id)" class="color-input">
+              <input type="color" v-model="color" @change="updateColor(note.id)" class="color-input" title="Change color">
 			        <i class="fas fa-palette"></i>
 		        </div>
 		        <button @click="pinNote(note.id)">
-              <i class="fas fa-thumbtack" :class="getPinColor"></i>
+              <i class="fas fa-thumbtack" :class="getPinColor" :title="getPinTitle"></i>
             </button>
-		        <button @click="edit(note.id)">
+		        <button @click="edit(note.id)" title="Edit">
               <i class="fas fa-edit"></i>
             </button>
-            <button @click="remove(note.id)">
+            <button @click="remove(note.id)" title="Remove">
               <i class="fas fa-trash"></i>
             </button>
-            <button @click="sendAsEmail(note.id)">
+            <button @click="sendAsEmail(note.id)" title="Send as mail">
             <i class="far fa-envelope"></i>
             </button>
             
@@ -66,6 +66,13 @@ export default {
         return { pinned: true };
       } else {
         return { pinned: false };
+      }
+    },
+    getPinTitle() {
+      if (this.note.isPinned) {
+        return 'Unpin';
+      } else {
+        return 'Pin';
       }
     },
   },

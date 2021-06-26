@@ -11,7 +11,7 @@
 }
 
 .img-note img {
-  width: 90%;
+  width: 100%;
   object-fit: cover;
   height: 102px;
 }

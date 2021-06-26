@@ -204,7 +204,7 @@ function addMail(mail) {
     id: mail.id,
     type: 'textNote',
     isPinned: false,
-    title: mail.subjuct,
+    title: mail.subject,
     info: {
       txt: mail.body,
     },

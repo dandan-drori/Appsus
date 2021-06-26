@@ -173,9 +173,26 @@ export default {
     },
     saveMail(mail) {
       console.log(mail);
-      keepService.addMail(mail).then((note) => {
-        console.log(note);
-      });
+      keepService
+        .addMail(mail)
+        .then(() => {
+          const msg = {
+            txt: 'Sent as Email',
+            type: 'success',
+            link: '/keep',
+          };
+          this.loadNotes();
+          eventBus.$emit('show-msg', msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error please try again!',
+            type: 'error',
+            link: '/keep',
+          };
+          eventBus.$emit('show-msg', msg);
+        });
     },
   },
   created() {
@@ -202,9 +219,7 @@ export default {
       }
       filteredNotes = filteredNotes.filter((note) => {
         if (note.type === 'textNote') {
-          return note.info.txt
-            .toLowerCase()
-            .includes(this.filterBy.toLowerCase());
+          return note.title.toLowerCase().includes(this.filterBy.toLowerCase());
         }
         if (note.type === 'listNote') {
           return note.info.label.toLowerCase().includes(this.filterBy);
