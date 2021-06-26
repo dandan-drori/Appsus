@@ -50,6 +50,9 @@ export default {
     pinNote(noteId) {
       this.$emit('setPin', noteId);
     },
+    sendAsEmail(noteId) {
+      this.$emit('sendAsEmail', noteId);
+    },
   },
   computed: {
     getColor() {

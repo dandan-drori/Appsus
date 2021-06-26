@@ -34,7 +34,9 @@ export default {
         	<component :is="note.type"  :note="note" @remove="removeNote"
 			 	@edit="onEditNote" 
 		 		@editColor="updateColor"
-				 @setPin="setPin"/>
+				 @setPin="setPin"
+         @sendAsEmail="sendNoteAsMail"
+         />
 	
 				</section>
 
