@@ -24,7 +24,8 @@ export default {
 			<component :is="note.type"  :note="note" @remove="removeNote"
 			 @edit="onEditNote" 
 			 @editColor="updateColor"
-			 @setPin="setPin"/>
+			 @setPin="setPin"
+       @sendAsEmail="sendNoteAsMail"/>
 				
 			</section>
 
@@ -48,6 +49,7 @@ export default {
       noteToEdit: null,
       key: '',
       filterBy: null,
+      mail: null,
     };
   },
   methods: {
@@ -138,6 +140,11 @@ export default {
     setFilter(filterBy) {
       this.filterBy = filterBy;
     },
+    sendNoteAsMail(noteId) {
+      keepService.getNoteById(noteId).then((note) => {
+        eventBus.$emit('send-note-as-mail', note);
+      });
+    },
     setPin(noteId) {
       keepService.getNoteById(noteId).then((note) => {
         keepService
@@ -162,10 +169,16 @@ export default {
           });
       });
     },
+    saveMail(mail) {
+      keepService.addMail(mail).then(() => {
+        this.loadNotes();
+      });
+    },
   },
   created() {
     this.loadNotes();
     eventBus.$on('set-filter-keep', this.setFilter);
+    eventBus.$on('save-mail');
   },
   components: {
     textNote,

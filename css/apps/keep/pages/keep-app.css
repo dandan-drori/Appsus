@@ -71,3 +71,10 @@
   height: 100%;
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 9px;
+    margin-right: 9px;
+  }
+}

@@ -25,6 +25,10 @@ export default {
             <button @click="remove(note.id)">
               <i class="fas fa-trash"></i>
             </button>
+            <button @click="sendAsEmail(note.id)">
+            <i class="far fa-envelope"></i>
+            </button>
+            
 		    </div>
       </div>
     `,

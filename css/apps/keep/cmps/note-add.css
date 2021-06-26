@@ -60,3 +60,21 @@
   justify-content: space-around;
   align-items: flex-end;
 }
+
+@media (max-width: 768px) {
+  .add-note .text-input {
+    max-width: 200px;
+  }
+  .add-note .title-input {
+    max-width: 110px;
+  }
+  .actions-container {
+    max-width: 90px;
+  }
+  .actions-container button {
+    margin-left: 10px;
+  }
+  .add.note-btn {
+    margin-left: 5px;
+  }
+}
