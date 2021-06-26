@@ -200,4 +200,28 @@ function updateNote(note) {
 
 function addMail(mail) {
   console.log(mail);
+  const noteEmail = {
+    id: mail.id,
+    type: 'textNote',
+    isPinned: false,
+    title: mail.subjuct,
+    info: {
+      txt: mail.body,
+    },
+    style: {
+      backgroundColor: mail.color || 'lightblue',
+    },
+  };
+  return storageService.post(NOTES_KEY, noteEmail);
 }
+
+// id: utilService.makeId(),
+// type: 'textNote',
+// isPinned: true,
+// title: 'Hey!',
+// info: {
+//   txt: 'Fullstack Me Baby!',
+// },
+// style: {
+//   backgroundColor: '#CDF0EA',
+// },
