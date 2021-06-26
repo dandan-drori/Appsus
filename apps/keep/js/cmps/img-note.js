@@ -1,9 +1,13 @@
+import longText from '../../../../js/cmps/long-text.js';
 export default {
-	props: ['note'],
-	template: `
+  props: ['note'],
+  components: {
+    longText,
+  },
+  template: `
     <div class="note img-note" :style="{backgroundColor:getColor}">
   <div>
-        <h2>{{note.info.title}}</h2>
+</h2><long-text :text='note.info.title' :maxLength='14'/></h2>
        <img :src="note.info.url">
        </div>
        <div class="note-actions-container">
@@ -19,38 +23,38 @@ export default {
 </div>
         
     `,
-	data() {
-		return {
-			color: this.note.style.backgroundColor,
-		}
-	},
-	methods: {
-		remove(noteId) {
-			this.$emit('remove', noteId)
-		},
-		edit(noteId) {
-			this.$emit('edit', noteId)
-		},
-		updateColor(noteId) {
-			this.$emit('editColor', this.color, noteId)
-		},
-		pinNote(noteId) {
-			this.$emit('setPin', noteId)
-		},
-	},
-	computed: {
-		getColor() {
-			return this.note.style.backgroundColor
-		},
-		title() {
-			return this.note.isPinned ? 'Unpin' : 'pin'
-		},
-		getPinColor() {
-			if (this.note.isPinned) {
-				return { pinned: true }
-			} else {
-				return { pinned: false }
-			}
-		},
-	},
-}
+  data() {
+    return {
+      color: this.note.style.backgroundColor,
+    };
+  },
+  methods: {
+    remove(noteId) {
+      this.$emit('remove', noteId);
+    },
+    edit(noteId) {
+      this.$emit('edit', noteId);
+    },
+    updateColor(noteId) {
+      this.$emit('editColor', this.color, noteId);
+    },
+    pinNote(noteId) {
+      this.$emit('setPin', noteId);
+    },
+  },
+  computed: {
+    getColor() {
+      return this.note.style.backgroundColor;
+    },
+    title() {
+      return this.note.isPinned ? 'Unpin' : 'pin';
+    },
+    getPinColor() {
+      if (this.note.isPinned) {
+        return { pinned: true };
+      } else {
+        return { pinned: false };
+      }
+    },
+  },
+};

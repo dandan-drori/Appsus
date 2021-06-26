@@ -3,15 +3,15 @@ export default {
         <section class="book-filter">
             <label>Search:</label>
             <input v-model="filterBy.title" type="text" @input="filter" placeholder="Search...">
-            <input v-model="filterBy.fromPrice" type="number" @input="filter" placeholder="Search...">
-            <input v-model="filterBy.toPrice" type="number" @input="filter" placeholder="Search...">
+            <input v-model="filterBy.fromPrice" type="number" @input="filter" placeholder="From price">
+            <input v-model="filterBy.toPrice" type="number" @input="filter" placeholder="To price">
         </section>
     `,
   data() {
     return {
       filterBy: {
         title: '',
-        fromPrice: 0,
+        fromPrice: null,
         toPrice: Infinity,
       },
     };

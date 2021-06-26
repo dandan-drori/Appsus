@@ -1,15 +1,18 @@
-import { keepService } from '../services/keep-service.js'
-
+import { keepService } from '../services/keep-service.js';
+import longText from '../../../../js/cmps/long-text.js';
 export default {
-	props: ['note'],
-	template: `
+  components: {
+    longText,
+  },
+  props: ['note'],
+  template: `
 	
         <div class="note list-note" :style="{backgroundColor:getColor}">
   <div>
-            <h2>{{note.info.label}}</h2>
+  </h2><long-text :text='note.info.label' :maxLength='14'/></h2>
             <ul class="todo-list">
                 <li v-for="(todo,idx) in note.info.todos" :key="todo.id" :class="isDone(idx)" @click="toggleDone(todo, idx)">
-                    {{todo.txt}}
+                    <long-text :text='todo.txt' :maxLength='14'/>
 </li>
             </ul>
             </div>
@@ -26,44 +29,44 @@ export default {
 </div>
         
     `,
-	data() {
-		return {
-			color: this.note.style.backgroundColor,
-		}
-	},
-	methods: {
-		isDone(idx) {
-			return { done: this.note.info.todos[idx].doneAt }
-		},
-		toggleDone(todo, idx) {
-			return keepService.toggleDone(this.note, idx)
-		},
-		remove(noteId) {
-			this.$emit('remove', noteId)
-		},
-		edit(noteId) {
-			this.$emit('edit', noteId)
-		},
-		updateColor(noteId) {
-			this.$emit('editColor', this.color, noteId)
-		},
-		pinNote(noteId) {
-			this.$emit('setPin', noteId)
-		},
-	},
-	computed: {
-		getColor() {
-			return this.note.style.backgroundColor
-		},
-		title() {
-			return this.note.isPinned ? 'Unpin' : 'pin'
-		},
-		getPinColor() {
-			if (this.note.isPinned) {
-				return { pinned: true }
-			} else {
-				return { pinned: false }
-			}
-		},
-	},
-}
+  data() {
+    return {
+      color: this.note.style.backgroundColor,
+    };
+  },
+  methods: {
+    isDone(idx) {
+      return { done: this.note.info.todos[idx].doneAt };
+    },
+    toggleDone(todo, idx) {
+      return keepService.toggleDone(this.note, idx);
+    },
+    remove(noteId) {
+      this.$emit('remove', noteId);
+    },
+    edit(noteId) {
+      this.$emit('edit', noteId);
+    },
+    updateColor(noteId) {
+      this.$emit('editColor', this.color, noteId);
+    },
+    pinNote(noteId) {
+      this.$emit('setPin', noteId);
+    },
+  },
+  computed: {
+    getColor() {
+      return this.note.style.backgroundColor;
+    },
+    title() {
+      return this.note.isPinned ? 'Unpin' : 'pin';
+    },
+    getPinColor() {
+      if (this.note.isPinned) {
+        return { pinned: true };
+      } else {
+        return { pinned: false };
+      }
+    },
+  },
+};

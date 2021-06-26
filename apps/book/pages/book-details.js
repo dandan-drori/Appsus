@@ -35,8 +35,9 @@ export default {
 
         </book-review>
         <router-link :to="'/book/' + prevBookId" class="next-btn">Previous Book</router-link>
+        <router-link to="/book" class='close-link'>Close</router-link >
         <router-link :to="'/book/' + nextBookId" class="next-btn">Next Book</router-link>
-        <router-link to="/book">Close</router-link>
+        
     </section>
 
   `,

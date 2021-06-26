@@ -7,7 +7,7 @@ export default {
     <h3>Add a review:</h3>
     <form @submit.prevent="save">
       <label>Name:</label>
-      <input v-model="bookToReview.name" type="text">
+      <input v-model="bookToReview.name" type="text" placeholder="Your name?">
       <label>Rate</label>
       <select v-model="bookToReview.rate">
         <option disabled value="">Book Rate</option>
@@ -20,8 +20,8 @@ export default {
       <label>Read at:</label>
       <input v-model="bookToReview.readAt" type="date">
       <label>More...:</label>
-      <textarea v-model="bookToReview.freeText"></textarea>
-        <button>Save</button>
+      <textarea v-model="bookToReview.freeText" placeholder="more"></textarea>
+        <button><i class="fas fa-save"></i></button>
     </form>
     
     </section>
