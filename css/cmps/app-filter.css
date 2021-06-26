@@ -18,3 +18,9 @@
 	padding: 0 10px;
 	cursor: pointer;
 }
+
+@media (max-width: 768px) {
+	.app-filter input {
+		width: initial;
+	}
+}

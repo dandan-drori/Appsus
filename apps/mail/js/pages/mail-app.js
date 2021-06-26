@@ -16,9 +16,13 @@ export default {
 	},
 	template: `
         <section class="mail-app main-app">
-            <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails"/>
-			<mobile-nav v-if="isMobile"/>
-            <mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
+			<div :class="backdropClass" @click="closeNav"></div>
+            <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails" :is-open="isNavOpen"/>
+			<div v-if="isMobile && !isComposing && !mail" class="container-mobile" >
+				<mobile-nav v-if="isMobile" />
+				<mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
+			</div>
+			<mail-list v-if="mails && !isComposing && !mail && !isMobile" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
 			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
 			<mail-details v-if="mail"  />
         </section>
@@ -35,6 +39,7 @@ export default {
 			sortBy: null,
 			read: null,
 			mail: null,
+			isNavOpen: false,
 		}
 	},
 	methods: {
@@ -145,6 +150,7 @@ export default {
 		},
 		openCompose() {
 			this.isComposing = true
+			this.closeNav()
 		},
 		closeCompose() {
 			this.mailToForward = null
@@ -166,6 +172,12 @@ export default {
 				}
 				eventBus.$emit('show-msg', msg)
 			})
+		},
+		openNav() {
+			this.isNavOpen = true
+		},
+		closeNav() {
+			this.isNavOpen = false
 		},
 	},
 	computed: {
@@ -203,6 +215,9 @@ export default {
 		isMobile() {
 			return screen.width < 768
 		},
+		backdropClass() {
+			return this.isNavOpen ? { backdrop: true, open: true } : { backdrop: true, open: false }
+		},
 	},
 	created() {
 		if (this.$route.path.includes('sent')) {
@@ -223,6 +238,7 @@ export default {
 		})
 		eventBus.$on('close-details', this.onCloseMail)
 		eventBus.$on('send-note-as-mail', this.saveNote)
+		eventBus.$on('open-nav', this.openNav)
 	},
 	watch: {
 		'$route.params.mailId': {

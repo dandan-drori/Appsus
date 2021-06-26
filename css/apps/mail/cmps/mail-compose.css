@@ -56,3 +56,13 @@
 	font-size: 2rem;
 	color: #222;
 }
+
+@media (max-width: 768px) {
+	.mail-compose {
+		width: 100%;
+	}
+	.mail-compose textarea {
+		width: 100%;
+		height: calc(100% - 10vh - 127px);
+	}
+}

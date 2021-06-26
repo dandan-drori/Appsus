@@ -4,9 +4,9 @@ export default {
 	components: {
 		progressBar,
 	},
-	props: { readMails: Number, mails: Array },
+	props: { readMails: Number, mails: Array, isOpen: Boolean },
 	template: `
-        <aside class="mail-sidebar">
+        <aside :class="openClass">
             <button @click="onCompose">
 				<i class="fas fa-plus"></i>Compose
 			</button>
@@ -27,7 +27,6 @@ export default {
 				{ to: '/mail', text: 'Inbox', class: 'fas fa-inbox' },
 				{ to: '/mail/sent', text: 'Sent Mail', class: 'fas fa-paper-plane' },
 				{ to: '/mail/star', text: 'Starred', class: 'far fa-star' },
-				{ to: '/mail/draft', text: 'Drafts', class: 'fas fa-file' },
 			],
 		}
 	},
@@ -36,5 +35,11 @@ export default {
 			this.$emit('open-compose')
 		},
 	},
-	computed: {},
+	computed: {
+		openClass() {
+			return this.isOpen
+				? { open: true, 'mail-sidebar': true }
+				: { open: false, 'mail-sidebar': true }
+		},
+	},
 }

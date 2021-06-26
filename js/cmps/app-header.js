@@ -1,8 +1,8 @@
-import appFilter from './app-filter.js';
+import appFilter from './app-filter.js'
 
 export default {
-  components: { appFilter },
-  template: `
+	components: { appFilter },
+	template: `
         <header class="main-header">
             <router-link to="/" class="main-logo"><img src="/imgs/logo.jpg" class="logo"/></router-link>
             <app-filter />
@@ -14,4 +14,4 @@ export default {
             </nav>
         </header>
     `,
-};
+}
