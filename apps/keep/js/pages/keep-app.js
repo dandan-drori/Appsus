@@ -51,7 +51,6 @@ export default {
       noteToEdit: null,
       key: '',
       filterBy: null,
-      mail: null,
     };
   },
   methods: {
@@ -145,6 +144,7 @@ export default {
     sendNoteAsMail(noteId) {
       keepService.getNoteById(noteId).then((note) => {
         eventBus.$emit('send-note-as-mail', note);
+        console.log(note);
       });
     },
     setPin(noteId) {
@@ -172,15 +172,16 @@ export default {
       });
     },
     saveMail(mail) {
-      keepService.addMail(mail).then(() => {
-        this.loadNotes();
+      console.log(mail);
+      keepService.addMail(mail).then((note) => {
+        console.log(note);
       });
     },
   },
   created() {
     this.loadNotes();
     eventBus.$on('set-filter-keep', this.setFilter);
-    eventBus.$on('save-mail');
+    eventBus.$on('save-mail-as-note', this.saveMail);
   },
   components: {
     textNote,
