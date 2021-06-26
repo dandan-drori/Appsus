@@ -8,7 +8,7 @@ export default {
             <p>
                 <long-text :text="mail.sender.name" :maxLength="20"/>
 			</p>
-            <section class="content-mobile">
+            <section class="content">
 				<section class="text">
 					<p>
 						<long-text :text="mail.subject" :maxLength="20"/>

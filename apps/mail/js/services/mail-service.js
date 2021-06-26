@@ -111,7 +111,7 @@ function _createMail(to = 'Dandan', cc, bcc, subject, body) {
 		isRead: false,
 		isSent: false,
 		isStarred: false,
-		isDraft: false,
 		sentAt: Date.now(),
+		color: utilService.getRandomColor(),
 	}
 }
