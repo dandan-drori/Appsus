@@ -154,9 +154,11 @@ export default {
 				this.selectedMail = mailId
 			}, 0)
 		},
-		saveNote(mail) {
-			mailService.addMail(mail).then(() => {
-				this.loadMails()
+		saveNote(note) {
+			mailService.formatNoteAsMail(note).then(mail => {
+				mailService.addMail(mail).then(() => {
+					this.loadMails()
+				})
 			})
 		},
 	},
@@ -211,7 +213,7 @@ export default {
 			this.read = read
 		})
 		eventBus.$on('close-details', this.onCloseMail)
-		eventBus.$on('send-note-as-mail', this.saveNote)
+		eventBus.$on('save-mail-as-note', this.saveNote)
 	},
 	watch: {
 		'$route.params.mailId': {

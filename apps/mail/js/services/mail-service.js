@@ -12,6 +12,7 @@ export const mailService = {
 	toggleStar,
 	getNextMailId,
 	getPrevMailId,
+	formatNoteAsMail,
 }
 
 var gMails = _createMails()
@@ -81,6 +82,8 @@ function getPrevMailId(mailId) {
 		return idx === 0 ? mails[mails.length - 1].id : mails[idx - 1].id
 	})
 }
+
+function formatNoteAsMail() {}
 
 function _createMails() {
 	return [

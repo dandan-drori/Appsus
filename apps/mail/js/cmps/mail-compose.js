@@ -65,7 +65,7 @@ export default {
 			this.$emit('send-mail', this.mailData)
 		},
 		onSaveMail() {
-			eventBus.$emit('save-mail', this.mailData)
+			eventBus.$emit('save-mail-as-note', this.mailData)
 		},
 	},
 	created() {
