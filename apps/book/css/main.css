@@ -62,10 +62,6 @@ ul {
   margin-bottom: 3px;
 }
 
-.add-book-title input {
-  text-decoration: underline;
-}
-
 .add-book-input {
   border-radius: 0;
   margin-bottom: 3px;
@@ -285,4 +281,13 @@ form input {
 
 .close-link {
   color: #0e86d4;
+}
+
+@media (max-width: 768px) {
+  .book-filter input {
+    width: 80px;
+  }
+  .book-filter label {
+    display: none;
+  }
 }

@@ -6,15 +6,15 @@ export default {
         
 		<div class="add-container">
 		<div class="actions-container">
-		<button @click="setTypeText"><i class="fas fa-font"></i></button>
-		<button @click="setTypeVideo"><i class="fab fa-youtube"></i></button>
-		<button @click="setTypeList"><i class="fas fa-list"></i></button>
-		<button @click="setTypeImage"><i class="fas fa-images"></i></button>
+		<button @click="setTypeText" titile="Text Note"><i class="fas fa-font"></i></button>
+		<button @click="setTypeVideo" title ="Video Note"><i class="fab fa-youtube"></i></button>
+		<button @click="setTypeList" title="List Note"><i class="fas fa-list"></i></button>
+		<button @click="setTypeImage" title="Image Note"><i class="fas fa-images"></i></button>
 		</div>
         <input v-model="noteContent" :placeholder="placeholder" class="text-input">
 		</div>
         <input v-model="noteTitle" placeholder="enter title" class="title-input">
-        <button @click="addNote" class='add-note-btn'><i :class="[isEdit ? 'far fa-save' : 'far fa-plus-square']"></i></button>
+        <button @click="addNote" class='add-note-btn' :title="toggleEditAdd"><i :class="[isEdit ? 'far fa-save' : 'far fa-plus-square']"></i></button>
         
     </section>`,
   data() {
@@ -33,6 +33,13 @@ export default {
         return 'Enter Url';
       } else if (this.noteType === 'listNote') {
         return 'Enter with commas!';
+      }
+    },
+    toggleEditAdd() {
+      if (this.isEdit) {
+        return 'Edit';
+      } else {
+        return 'Add';
       }
     },
   },
