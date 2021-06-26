@@ -15,6 +15,7 @@ export default {
 	template: `
         <section class="mail-app main-app">
             <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails"/>
+			<!-- mobile nav-bar to show/hide sidebar -->
             <mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
 			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
 			<mail-details v-if="mail"  />
@@ -153,6 +154,11 @@ export default {
 				this.selectedMail = mailId
 			}, 0)
 		},
+		saveNote(mail) {
+			mailService.addMail(mail).then(() => {
+				this.loadMails()
+			})
+		},
 	},
 	computed: {
 		mailsToShow() {
@@ -205,6 +211,7 @@ export default {
 			this.read = read
 		})
 		eventBus.$on('close-details', this.onCloseMail)
+		eventBus.$on('send-note-as-mail', this.saveNote)
 	},
 	watch: {
 		'$route.params.mailId': {

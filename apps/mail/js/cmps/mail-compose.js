@@ -1,3 +1,5 @@
+import { eventBus } from '../../../../js/services/event-bus-service.js'
+
 export default {
 	props: { mail: Object },
 	template: `
@@ -24,6 +26,10 @@ export default {
             <textarea name="body" v-model="mailData.body"></textarea>
             <section class="actions">
                 <button class="send" @click="onSendMail">Send</button>
+				<button class="save" @click="onSaveMail">
+					Save as note
+					<i class="far fa-sticky-note"></i>
+				</button>
                 <button @click="onCloseCompose">
 					<i class="fas fa-trash compose-trash"></i>
 				</button>
@@ -38,6 +44,7 @@ export default {
 				bcc: null,
 				subject: null,
 				body: null,
+				color: null,
 			},
 		}
 	},
@@ -48,6 +55,7 @@ export default {
 			this.mailData.bcc = null
 			this.mailData.subject = null
 			this.mailData.body = null
+			this.mailData.color = null
 		},
 		onCloseCompose() {
 			this.resetData()
@@ -56,16 +64,20 @@ export default {
 		onSendMail() {
 			this.$emit('send-mail', this.mailData)
 		},
+		onSaveMail() {
+			eventBus.$emit('save-mail', this.mailData)
+		},
 	},
 	created() {
 		if (this.mail) {
-			const { cc, bcc, subject, body } = this.mail
+			const { cc, bcc, subject, body, color } = this.mail
 			this.mailData.to = 'Dandan'
 			if (this.mail.to) this.mailData.to = this.mail.to
 			this.mailData.cc = cc
 			this.mailData.bcc = bcc
 			this.mailData.subject = 'Re: ' + subject
 			this.mailData.body = body
+			this.mailData.color = color
 		}
 	},
 }
