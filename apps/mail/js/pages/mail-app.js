@@ -4,6 +4,7 @@ import mailSidebar from '../cmps/mail-sidebar.js'
 import mailDetails from './mail-details.js'
 import { mailService } from '../services/mail-service.js'
 import { eventBus } from '../../../../js/services/event-bus-service.js'
+import mobileNav from '../cmps/mobile-nav.js'
 
 export default {
 	components: {
@@ -11,11 +12,12 @@ export default {
 		mailList,
 		mailCompose,
 		mailDetails,
+		mobileNav,
 	},
 	template: `
         <section class="mail-app main-app">
             <mail-sidebar v-if="mails" @open-compose="openCompose" :read-mails="readMails" :mails="mails"/>
-			<!-- mobile nav-bar to show/hide sidebar -->
+			<mobile-nav v-if="isMobile"/>
             <mail-list v-if="mails && !isComposing && !mail" :mails="mailsToShow" :selected-mail="selectedMail" :recent-unread="recentUnread" @delete-mail="onDeleteMail" @select-mail="onSelectMail" @forward-mail="onForwardMail" @unread-mail="onUnreadMail" @read-mail="onReadMail" @toggle-star="onToggleStar" @expand-mail="onExpandMail" @open-peek="openPeek"/>
 			<mail-compose v-if="isComposing" :mail="mailToForward" @close-compose="closeCompose" @send-mail="onSendMail"/>
 			<mail-details v-if="mail"  />
@@ -156,9 +158,13 @@ export default {
 		},
 		saveNote(note) {
 			mailService.formatNoteAsMail(note).then(mail => {
-				mailService.addMail(mail).then(() => {
-					this.loadMails()
-				})
+				this.loadMails()
+				const msg = {
+					type: 'success',
+					txt: 'mail saved as note',
+					link: '/keep',
+				}
+				eventBus.$emit('show-msg', msg)
 			})
 		},
 	},
@@ -194,6 +200,9 @@ export default {
 				})
 			}
 		},
+		isMobile() {
+			return screen.width < 768
+		},
 	},
 	created() {
 		if (this.$route.path.includes('sent')) {
@@ -213,7 +222,7 @@ export default {
 			this.read = read
 		})
 		eventBus.$on('close-details', this.onCloseMail)
-		eventBus.$on('save-mail-as-note', this.saveNote)
+		eventBus.$on('send-note-as-mail', this.saveNote)
 	},
 	watch: {
 		'$route.params.mailId': {

@@ -83,7 +83,21 @@ function getPrevMailId(mailId) {
 	})
 }
 
-function formatNoteAsMail() {}
+function formatNoteAsMail(note) {
+	const { id, info, title, style } = note
+	const mail = {
+		id,
+		to: ['Dandan'],
+		cc: ['Dandan'],
+		bcc: ['Dandan'],
+		subject: title,
+		body: info.txt,
+		color: style.backgroundColor,
+	}
+	return addMail(mail).then(newMail => {
+		return newMail
+	})
+}
 
 function _createMails() {
 	return [
